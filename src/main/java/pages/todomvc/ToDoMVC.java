@@ -1,7 +1,8 @@
 package pages.todomvc;
 
-import core.wrappers.LazyCollection;
 import core.wrappers.LazyElement;
+import core.wrappers.LazyCollection;
+import core.wrappers.LazyElementByLocator;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import static pages.todomvc.ToDoMVC.Task.Status;
 public class ToDoMVC {
     public static LazyCollection tasks = $$("#todo-list li");
 
-    public static LazyElement newTask = $("#new-todo");
+    public static LazyElementByLocator newTask = $("#new-todo");
 
     public static void add(String... taskTexts) {
         for (String text : taskTexts) {

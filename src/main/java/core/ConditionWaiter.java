@@ -56,9 +56,7 @@ public class ConditionWaiter {
     public <V> V applyWithExceptionsCatching(CustomCondition<V> condition) {
         try {
             return condition.apply(lazyEntity);
-        } catch (WebDriverException e) {
-            return null;
-        } catch (IndexOutOfBoundsException e) {
+        } catch (WebDriverException|IndexOutOfBoundsException e) {
             return null;
         }
     }

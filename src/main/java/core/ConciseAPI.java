@@ -1,7 +1,7 @@
 package core;
 
 import core.wrappers.LazyCollection;
-import core.wrappers.LazyElement;
+import core.wrappers.LazyElementByLocator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -23,11 +23,11 @@ public class ConciseAPI {
         drivers.put(Thread.currentThread(), driver);
     }
 
-    public static LazyElement $(By locator) {
-        return new LazyElement(locator);
+    public static LazyElementByLocator $(By locator) {
+        return new LazyElementByLocator(locator);
     }
 
-    public static LazyElement $(String cssSelector) {
+    public static LazyElementByLocator $(String cssSelector) {
         return $(byCSS(cssSelector));
     }
 

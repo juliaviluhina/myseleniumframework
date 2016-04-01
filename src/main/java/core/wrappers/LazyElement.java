@@ -5,28 +5,15 @@ import org.openqa.selenium.*;
 
 import java.util.List;
 
-import static core.ConciseAPI.*;
+import static core.ConciseAPI.actions;
+import static core.ConciseAPI.byCSS;
 import static core.ConditionWaiter.waitFor;
 import static core.conditions.CustomElementConditions.visible;
 
-public class LazyElement implements LazyEntity, WebElement {
 
-    protected By locator;
+public abstract class LazyElement implements LazyEntity, WebElement {
 
-    public LazyElement(By locator) {
-        this.locator = locator;
-    }
-
-    protected LazyElement() {
-    }
-
-    public String toString() {
-        return locator.toString();
-    }
-
-    public WebElement getWrappedEntity() {
-        return getDriver().findElement(locator);
-    }
+    public abstract WebElement getWrappedEntity();
 
     public LazyCollectionElementByInnerLocator find(By innerLocator) {
         waitFor(this, visible());
@@ -156,4 +143,5 @@ public class LazyElement implements LazyEntity, WebElement {
     public String getCssValue(String s) {
         return getWrappedEntity().getCssValue(s);
     }
+
 }
