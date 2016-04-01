@@ -1,38 +1,38 @@
-package core.wrappers;
+package core.wrappers.collection;
 
 import core.conditions.CustomElementCondition;
+import core.wrappers.element.LazyWrappedWebElement;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static core.WaitFor.applyWithExceptionsCatching;
 
 
-public class LazyCollectionElementByCondition extends LazyElement {
+public class LazyFilteredCollection extends LazyCollection {
 
     private CustomElementCondition condition;
     private LazyCollection parentCollection;
 
-    public LazyCollectionElementByCondition(LazyCollection parentCollection, CustomElementCondition condition) {
+    public LazyFilteredCollection(LazyCollection parentCollection, CustomElementCondition condition) {
         this.parentCollection = parentCollection;
         this.condition = condition;
     }
 
     public String toString() {
-        return parentCollection.toString() + " find(" + condition + ")";
+        return parentCollection.toString() + " filter(" + condition + ")";
     }
 
-
-    public WebElement getWrappedEntity() {
+    public List<WebElement> getWrappedEntity() {
         List<WebElement> list = parentCollection.getWrappedEntity();
+        List<WebElement> resultList = new ArrayList<WebElement>();
 
         for (WebElement element : list) {
             if (applyWithExceptionsCatching(new LazyWrappedWebElement(this, element), condition) != null)
-                return element;
+                resultList.add(element);
         }
 
-        return null;
+        return resultList;
     }
-
 }
-

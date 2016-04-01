@@ -1,6 +1,8 @@
-package core.wrappers;
+package core.wrappers.element;
 
 import core.conditions.CustomElementCondition;
+import core.wrappers.LazyEntity;
+import core.wrappers.collection.LazyCollectionByInnerLocator;
 import org.openqa.selenium.*;
 
 import java.util.List;
@@ -22,6 +24,14 @@ public abstract class LazyElement implements LazyEntity, WebElement {
 
     public LazyCollectionElementByInnerLocator find(String cssSelector) {
         return find(byCSS(cssSelector));
+    }
+
+    public LazyCollectionByInnerLocator findAll(By innerLocator) {
+        return new LazyCollectionByInnerLocator(this, innerLocator);
+    }
+
+    public LazyCollectionByInnerLocator findAll(String cssSelector) {
+        return findAll(byCSS(cssSelector));
     }
 
     public LazyElement setValue(String text) {

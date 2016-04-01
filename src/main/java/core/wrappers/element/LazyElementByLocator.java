@@ -1,5 +1,6 @@
-package core.wrappers;
+package core.wrappers.element;
 
+import core.wrappers.element.LazyElement;
 import org.openqa.selenium.*;
 
 import static core.ConciseAPI.*;

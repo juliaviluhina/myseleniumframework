@@ -1,6 +1,6 @@
 package pages.gmail;
 
-import core.wrappers.LazyCollection;
+import core.wrappers.collection.LazyCollection;
 import org.openqa.selenium.By;
 
 import static core.ConciseAPI.*;

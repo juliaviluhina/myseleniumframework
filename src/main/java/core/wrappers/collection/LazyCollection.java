@@ -1,33 +1,24 @@
-package core.wrappers;
+package core.wrappers.collection;
 
 import core.conditions.CustomCollectionCondition;
 import core.conditions.CustomElementCondition;
-import org.openqa.selenium.By;
+import core.wrappers.*;
+import core.wrappers.element.LazyCollectionElementByCondition;
+import core.wrappers.element.LazyCollectionElementByIndex;
+import core.wrappers.element.LazyElement;
+import core.wrappers.element.LazyWrappedWebElement;
 import org.openqa.selenium.WebElement;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-import static core.ConciseAPI.getDriver;
 import static core.WaitFor.waitFor;
 
-public class LazyCollection implements LazyEntity, Iterable<LazyElement> {
 
-    protected By locator;
+public abstract class LazyCollection implements LazyEntity, Iterable<LazyElement> {
 
-    public LazyCollection(By locator) {
-        this.locator = locator;
-    }
-
-    protected LazyCollection() {
-    }
-
-    public String toString() {
-        return locator.toString();
-    }
-
-    public List<WebElement> getWrappedEntity() {
-        return getDriver().findElements(locator);
-    }
+    public abstract List<WebElement> getWrappedEntity();
 
     public LazyCollectionElementByCondition find(CustomElementCondition condition) {
         return new LazyCollectionElementByCondition(this, condition);

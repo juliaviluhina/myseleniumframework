@@ -1,8 +1,7 @@
 package pages.todomvc;
 
-import core.wrappers.LazyElement;
-import core.wrappers.LazyCollection;
-import core.wrappers.LazyElementByLocator;
+import core.wrappers.collection.LazyCollection;
+import core.wrappers.element.LazyElement;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;
@@ -15,9 +14,9 @@ import static core.conditions.CustomElementConditions.*;
 import static pages.todomvc.ToDoMVC.Task.Status;
 
 public class ToDoMVC {
-    public static LazyCollection tasks = $$("#todo-list li");
+    public static LazyCollection tasks = $$("#todo-list li"); //$("#todo-list").findAll("li");
 
-    public static LazyElementByLocator newTask = $("#new-todo");
+    public static LazyElement newTask = $("#new-todo");
 
     public static void add(String... taskTexts) {
         for (String text : taskTexts) {
