@@ -3,6 +3,9 @@ package core.wrappers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import static core.WaitFor.waitFor;
+import static core.conditions.CustomElementConditions.visible;
+
 public class LazyCollectionElementByInnerLocator extends LazyElement {
 
     private By innerLocator;
@@ -18,6 +21,7 @@ public class LazyCollectionElementByInnerLocator extends LazyElement {
     }
 
     public WebElement getWrappedEntity() {
+        waitFor(parentElement, visible());
         return parentElement.getWrappedEntity().findElement(innerLocator);
     }
 

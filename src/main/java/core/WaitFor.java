@@ -8,16 +8,16 @@ import org.openqa.selenium.WebDriverException;
 import static core.ConciseAPI.sleep;
 
 
-public class ConditionWaiter {
+public class WaitFor {
 
     private LazyEntity lazyEntity;
 
-    public ConditionWaiter(LazyEntity lazyEntity) {
+    public WaitFor(LazyEntity lazyEntity) {
         this.lazyEntity = lazyEntity;
     }
 
     public static <V> V waitFor(LazyEntity lazyEntity, int timeoutMs, CustomCondition<V>... conditions) {
-        return new ConditionWaiter(lazyEntity).waitFor(timeoutMs, conditions);
+        return new WaitFor(lazyEntity).waitFor(timeoutMs, conditions);
     }
 
     public static <V> V waitFor(LazyEntity lazyEntity, CustomCondition<V>... conditions) {
@@ -25,7 +25,7 @@ public class ConditionWaiter {
     }
 
     public static <V> V applyWithExceptionsCatching(LazyEntity lazyEntity, CustomCondition<V> condition) {
-        return new ConditionWaiter(lazyEntity).applyWithExceptionsCatching(condition);
+        return new WaitFor(lazyEntity).applyWithExceptionsCatching(condition);
     }
 
 
@@ -34,7 +34,7 @@ public class ConditionWaiter {
         for (CustomCondition<V> condition : conditions) {
             result = waitForWithoutException(timeoutMs, condition);
             if (result == null)
-                throw new TimeoutConditionWaitingException(getDescriptionException(condition, lazyEntity));
+                throw new TimeoutException(getDescriptionException(condition, lazyEntity));
         }
         return result;
     }

@@ -5,16 +5,12 @@ import core.conditions.CustomElementCondition;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 import static core.ConciseAPI.getDriver;
-import static core.ConditionWaiter.waitFor;
-import static core.conditions.CustomCollectionConditions.minimumSize;
+import static core.WaitFor.waitFor;
 
-public class LazyCollection implements LazyEntity {
+public class LazyCollection implements LazyEntity, Iterable<LazyElement> {
 
     protected By locator;
 
@@ -42,7 +38,6 @@ public class LazyCollection implements LazyEntity {
     }
 
     public LazyCollectionElementByIndex get(int index) {
-        waitFor(this, minimumSize(index + 1));
         return new LazyCollectionElementByIndex(this, index);
     }
 
@@ -57,6 +52,25 @@ public class LazyCollection implements LazyEntity {
 
     public LazyCollection shouldHave(CustomCollectionCondition... conditions) {
         return should(conditions);
+    }
+
+    public int size() {
+        return getWrappedEntity().size();
+    }
+
+    public boolean isEmpty() {
+        return getWrappedEntity().isEmpty();
+    }
+
+    private List<LazyElement> getListOfWrappedElements() {
+        List<LazyElement> list = new ArrayList<>();
+        for (WebElement element:getWrappedEntity())
+            list.add(new LazyWrappedWebElement(this, element));
+        return list;
+    }
+
+    public Iterator<LazyElement> iterator() {
+        return getListOfWrappedElements().iterator();
     }
 
 }

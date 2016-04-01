@@ -3,7 +3,7 @@ package core.wrappers;
 import org.openqa.selenium.*;
 
 import static core.ConciseAPI.*;
-import static core.ConditionWaiter.waitFor;
+import static core.WaitFor.waitFor;
 
 public class LazyElementByLocator extends LazyElement {
 

@@ -1,9 +1,6 @@
 package core.conditions;
 
-import core.conditions.element.CssClass;
-import core.conditions.element.ElementVisible;
-import core.conditions.element.ExactText;
-import core.conditions.element.Text;
+import core.conditions.element.*;
 
 public class CustomElementConditions {
     public static CustomElementCondition text(final String text) {
@@ -20,5 +17,9 @@ public class CustomElementConditions {
 
     public static CustomElementCondition visible() {
         return new ElementVisible();
+    }
+
+    public static CustomElementCondition present() {
+        return new ElementPresent();
     }
 }

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static core.ConditionWaiter.applyWithExceptionsCatching;
+import static core.WaitFor.applyWithExceptionsCatching;
 
 
 public class LazyFilteredCollection extends LazyCollection {

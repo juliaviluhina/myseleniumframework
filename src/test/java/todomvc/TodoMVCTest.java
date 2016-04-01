@@ -1,5 +1,6 @@
 package todomvc;
 
+import core.wrappers.LazyElement;
 import org.junit.Test;
 import testconfig.BaseTest;
 
@@ -80,9 +81,14 @@ public class TodoMVCTest extends BaseTest {
 
     @Test
     public void test1() {
-        givenAtAll(ACTIVE, "ab", "b");
+        givenAtAll(ACTIVE, "аb", "ааb");
 
-        tasks.filter(visible()).filter(text("a")).filter(text("b")).shouldHave(size(2));
+        //tasks.filter(visible()).filter(text("a")).filter(text("b")).shouldHave(size(2));
+
+        for (LazyElement element:tasks) {
+            System.out.println(element.getText());
+            element.shouldHave(text("а"));
+        }
     }
 
 }
