@@ -79,18 +79,18 @@ public class TodoMVCTest extends BaseTest {
         assertItemsLeft(2);
     }
 
-//    @Test
-//    public void test1() {
-//        givenAtAll(ACTIVE, "аb", "ааb");
+    @Test
+    public void test1() {
+        givenAtAll(ACTIVE, "аb", "ааb");
 
-        //tasks.filter(visible()).filter(text("a")).filter(text("b")).shouldHave(size(2));
-
+//        tasks.filter(visible()).filter(text("a")).filter(text("b")).shouldHave(size(2));
+//
 //        for (LazyElement element:tasks) {
 //            System.out.println(element.getText());
 //            element.shouldHave(text("а"));
 //        }
 
-//        $("#todo-list").findAll("li").shouldHave(texts("аba", "ааb"));
-//    }
+        $("#todo-list").findAll("li").shouldHave(texts("аba", "ааb"));
+    }
 
 }

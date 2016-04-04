@@ -1,7 +1,6 @@
 package core;
 
-import core.conditions.CustomCollectionCondition;
-import core.conditions.CustomCondition;
+import core.conditions.CustomConditionInterface;
 import core.wrappers.LazyEntity;
 import org.openqa.selenium.WebDriverException;
 
@@ -16,30 +15,30 @@ public class WaitFor {
         this.lazyEntity = lazyEntity;
     }
 
-    public static <V> V waitFor(LazyEntity lazyEntity, int timeoutMs, CustomCondition<V>... conditions) {
-        return new WaitFor(lazyEntity).waitFor(timeoutMs, conditions);
+    public static <V> V waitFor(LazyEntity lazyEntity, int timeoutMs, CustomConditionInterface<V>... conditions) {
+        return new WaitFor(lazyEntity).until(timeoutMs, conditions);
     }
 
-    public static <V> V waitFor(LazyEntity lazyEntity, CustomCondition<V>... conditions) {
+    public static <V> V waitFor(LazyEntity lazyEntity, CustomConditionInterface<V>... conditions) {
         return waitFor(lazyEntity, Configuration.timeout, conditions);
     }
 
-    public static <V> V applyWithExceptionsCatching(LazyEntity lazyEntity, CustomCondition<V> condition) {
+    public static <V> V applyWithExceptionsCatching(LazyEntity lazyEntity, CustomConditionInterface<V> condition) {
         return new WaitFor(lazyEntity).applyWithExceptionsCatching(condition);
     }
 
 
-    public <V> V waitFor(int timeoutMs, CustomCondition<V>... conditions) {
+    public <V> V until(int timeoutMs, CustomConditionInterface<V>... conditions) {
         V result = null;
-        for (CustomCondition<V> condition : conditions) {
-            result = waitForWithoutException(timeoutMs, condition);
+        for (CustomConditionInterface<V> condition : conditions) {
+            result = untilWithoutException(timeoutMs, condition);
             if (result == null)
-                throw new TimeoutException(getDescriptionException(condition, lazyEntity));
+                throw new TimeoutException(condition, timeoutMs);
         }
         return result;
     }
 
-    public <V> V waitForWithoutException(int timeoutMs, CustomCondition<V> condition) {
+    public <V> V untilWithoutException(int timeoutMs, CustomConditionInterface<V> condition) {
         final long startTime = System.currentTimeMillis();
         do {
             V results = applyWithExceptionsCatching(condition);
@@ -53,19 +52,12 @@ public class WaitFor {
         return null;
     }
 
-    public <V> V applyWithExceptionsCatching(CustomCondition<V> condition) {
+    public <V> V applyWithExceptionsCatching(CustomConditionInterface<V> condition) {
         try {
             return condition.apply(lazyEntity);
         } catch (WebDriverException|IndexOutOfBoundsException e) {
             return null;
         }
-    }
-
-    private String getDescriptionException(CustomCondition condition, LazyEntity lazyEntity) {
-        return "\nFor " + ((condition instanceof CustomCollectionCondition) ? "elements" : "element") +
-                " located by " + lazyEntity + "\n" +
-                condition.toString() +
-                (condition.getActualValuesDescription() == "" ? "" : "\nwhile actual is: " + condition.getActualValuesDescription());
     }
 
 }

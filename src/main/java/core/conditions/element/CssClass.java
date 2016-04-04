@@ -6,25 +6,22 @@ import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 
-/**
- * Created by julia on 3/26/2016.
- */
+
 public class CssClass extends CustomElementCondition {
 
     protected final String cssClass;
     String[] classes;
-    private LazyEntity lazyEntity;
 
     public CssClass(String cssClass) {
         this.cssClass = cssClass;
     }
 
-    public String toString() {
-        return String.format("cssClass is contained: ", cssClass);
+    public String actual() {
+        return Arrays.toString(classes);
     }
 
-    public String getActualValuesDescription() {
-        return Arrays.toString(classes);
+    public String expected() {
+        return cssClass;
     }
 
     public WebElement apply(LazyEntity lazyEntity) {

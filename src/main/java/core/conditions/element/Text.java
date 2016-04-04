@@ -8,18 +8,17 @@ public class Text extends CustomElementCondition {
 
     protected String currentText;
     protected String text;
-    protected LazyEntity lazyEntity;
 
     public Text(String text) {
         this.text = text;
     }
 
-    public String toString() {
-        return String.format("Text contains: %s", text);
+    public String actual() {
+        return currentText;
     }
 
-    public String getActualValuesDescription() {
-        return currentText;
+    public String expected() {
+        return text;
     }
 
     public WebElement apply(LazyEntity lazyEntity) {
@@ -35,6 +34,5 @@ public class Text extends CustomElementCondition {
     protected boolean check() {
         return currentText.contains(text);
     }
-
 
 }

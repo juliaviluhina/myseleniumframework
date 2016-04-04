@@ -3,10 +3,18 @@ package core.conditions;
 
 import core.wrappers.LazyEntity;
 
-public interface CustomCondition<V> {
+public abstract class CustomCondition<V> implements CustomConditionInterface<V> {
 
-    <V> V apply(LazyEntity lazyEntity);
+    protected LazyEntity lazyEntity;
 
-    String getActualValuesDescription();
+    public LazyEntity entity() {
+        return lazyEntity;
+    }
 
+    public String toString() {
+        return getClass().getSimpleName() +
+                "\nfor " + identity() + " found by: " + entity() +
+                (expected() == "" ? "" : "\nexpected " + expected()) +
+                (actual() == "" ? "" : "\nactual " + actual());
+    }
 }

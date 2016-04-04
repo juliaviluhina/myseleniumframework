@@ -10,18 +10,17 @@ public class Size extends CustomCollectionCondition {
 
     private int listSize;
     protected final int expectedSize;
-    private LazyEntity lazyEntity;
 
     public Size(int expectedSize) {
         this.expectedSize = expectedSize;
     }
 
-    public String toString() {
-        return String.format("size(%s)", expectedSize);
+    public String actual() {
+        return Integer.toString(listSize);
     }
 
-    public String getActualValuesDescription() {
-        return Integer.toString(listSize);
+    public String expected() {
+        return Integer.toString(expectedSize);
     }
 
     public List<WebElement> apply(LazyEntity lazyEntity) {

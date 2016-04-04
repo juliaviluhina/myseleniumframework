@@ -7,14 +7,12 @@ import org.openqa.selenium.WebElement;
 
 public class ElementPresent extends CustomElementCondition {
 
-    private LazyEntity lazyEntity;
-
-    public String toString() {
-        return String.format("present");
+    public String actual() {
+        return "";
     }
 
-    public String getActualValuesDescription() {
-        return "";
+    public String expected() {
+        return "present";
     }
 
     public WebElement apply(LazyEntity lazyEntity) {

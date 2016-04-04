@@ -6,14 +6,12 @@ import org.openqa.selenium.WebElement;
 
 public class ElementVisible extends CustomElementCondition {
 
-    private LazyEntity lazyEntity;
-
-    public String toString() {
-        return String.format("visible");
+    public String actual() {
+        return "";
     }
 
-    public String getActualValuesDescription() {
-        return "";
+    public String expected() {
+        return "visible";
     }
 
     public WebElement apply(LazyEntity lazyEntity) {

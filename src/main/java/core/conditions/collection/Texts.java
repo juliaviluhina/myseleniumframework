@@ -12,18 +12,17 @@ public class Texts extends CustomCollectionCondition {
 
     protected List<String> currentTexts;
     protected String[] texts;
-    protected LazyEntity lazyEntity;
 
     public Texts(String... texts) {
         this.texts = texts;
     }
 
-    public String toString() {
-        return String.format("texts contains: ", Arrays.toString(texts));
+    public String actual() {
+        return Arrays.toString(currentTexts.toArray());
     }
 
-    public String getActualValuesDescription() {
-        return Arrays.toString(currentTexts.toArray());
+    public String expected() {
+        return Arrays.toString(texts);
     }
 
     public List<WebElement> apply(LazyEntity lazyEntity) {
