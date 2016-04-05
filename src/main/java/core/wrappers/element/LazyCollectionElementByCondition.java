@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 
-
 public class LazyCollectionElementByCondition extends LazyElement {
 
     private CustomElementCondition condition;

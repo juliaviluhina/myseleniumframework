@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import core.WaitFor;
+
 import static core.conditions.CustomElementConditions.visible;
 
 public class LazyCollectionElementByInnerLocator extends LazyElement {

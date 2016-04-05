@@ -4,6 +4,7 @@ import core.wrappers.collection.LazyCollection;
 import org.openqa.selenium.WebElement;
 
 import core.WaitFor;
+
 import static core.conditions.CustomCollectionConditions.minimumSize;
 
 public class LazyCollectionElementByIndex extends LazyElement {

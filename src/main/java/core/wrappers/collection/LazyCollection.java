@@ -55,7 +55,7 @@ public abstract class LazyCollection implements LazyEntity, Iterable<LazyElement
 
     private List<LazyElement> getListOfWrappedElements() {
         List<LazyElement> list = new ArrayList<>();
-        for (WebElement element:getWrappedEntity())
+        for (WebElement element : getWrappedEntity())
             list.add(new LazyWrappedWebElement(this, element));
         return list;
     }

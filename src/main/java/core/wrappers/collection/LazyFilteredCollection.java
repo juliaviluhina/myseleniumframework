@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-
 public class LazyFilteredCollection extends LazyCollection {
 
     private CustomElementCondition condition;

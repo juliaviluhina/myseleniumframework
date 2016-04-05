@@ -9,7 +9,9 @@ import java.util.List;
 
 import static core.ConciseAPI.actions;
 import static core.ConciseAPI.byCSS;
+
 import core.WaitFor;
+
 import static core.conditions.CustomElementConditions.present;
 import static core.conditions.CustomElementConditions.visible;
 
