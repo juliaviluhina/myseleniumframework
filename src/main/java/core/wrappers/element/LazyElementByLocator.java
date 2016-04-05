@@ -1,10 +1,8 @@
 package core.wrappers.element;
 
-import core.wrappers.element.LazyElement;
 import org.openqa.selenium.*;
 
 import static core.ConciseAPI.*;
-import static core.WaitFor.waitFor;
 
 public class LazyElementByLocator extends LazyElement {
 

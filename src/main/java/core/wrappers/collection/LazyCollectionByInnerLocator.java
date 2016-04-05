@@ -6,9 +6,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static core.WaitFor.waitFor;
+import core.WaitFor;
 import static core.conditions.CustomElementConditions.present;
-import static core.conditions.CustomElementConditions.visible;
 
 public class LazyCollectionByInnerLocator extends LazyCollection {
 
@@ -25,7 +24,7 @@ public class LazyCollectionByInnerLocator extends LazyCollection {
     }
 
     public List<WebElement> getWrappedEntity() {
-        waitFor(parentElement, present());
+        WaitFor.until(parentElement, present());
         return parentElement.getWrappedEntity().findElements(innerLocator);
     }
 

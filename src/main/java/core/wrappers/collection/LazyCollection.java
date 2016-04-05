@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static core.WaitFor.waitFor;
+import core.WaitFor;
 
 
 public abstract class LazyCollection implements LazyEntity, Iterable<LazyElement> {
@@ -33,7 +33,7 @@ public abstract class LazyCollection implements LazyEntity, Iterable<LazyElement
     }
 
     public LazyCollection should(CustomCollectionCondition... conditions) {
-        waitFor(this, conditions);
+        WaitFor.until(this, conditions);
         return this;
     }
 

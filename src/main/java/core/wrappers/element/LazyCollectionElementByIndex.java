@@ -3,7 +3,7 @@ package core.wrappers.element;
 import core.wrappers.collection.LazyCollection;
 import org.openqa.selenium.WebElement;
 
-import static core.WaitFor.waitFor;
+import core.WaitFor;
 import static core.conditions.CustomCollectionConditions.minimumSize;
 
 public class LazyCollectionElementByIndex extends LazyElement {
@@ -21,7 +21,7 @@ public class LazyCollectionElementByIndex extends LazyElement {
     }
 
     public WebElement getWrappedEntity() {
-        waitFor(parentCollection, minimumSize(index + 1));
+        WaitFor.until(parentCollection, minimumSize(index + 1));
         return parentCollection.getWrappedEntity().get(index);
     }
 

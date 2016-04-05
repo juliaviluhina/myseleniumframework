@@ -14,7 +14,7 @@ import static core.Helpers.getUniqueText;
 public class GmailTest extends BaseTest {
 
     static {
-        Configuration.timeout = 15000;
+        Configuration.timeout = 20000;
     }
 
     @Test

@@ -23,7 +23,7 @@ public class Size extends CustomCollectionCondition {
         return Integer.toString(expectedSize);
     }
 
-    public List<WebElement> apply(LazyEntity lazyEntity) {
+    public List<WebElement> check(LazyEntity lazyEntity) {
         this.lazyEntity = lazyEntity;
         List<WebElement> results = (List<WebElement>) lazyEntity.getWrappedEntity();
         listSize = results.size();

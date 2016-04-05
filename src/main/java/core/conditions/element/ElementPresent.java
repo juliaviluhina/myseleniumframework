@@ -15,7 +15,7 @@ public class ElementPresent extends CustomElementCondition {
         return "present";
     }
 
-    public WebElement apply(LazyEntity lazyEntity) {
+    public WebElement check(LazyEntity lazyEntity) {
         this.lazyEntity = lazyEntity;
         WebElement element = (WebElement) lazyEntity.getWrappedEntity();
         return element;

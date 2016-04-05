@@ -24,7 +24,7 @@ public class CssClass extends CustomElementCondition {
         return cssClass;
     }
 
-    public WebElement apply(LazyEntity lazyEntity) {
+    public WebElement check(LazyEntity lazyEntity) {
         this.lazyEntity = lazyEntity;
         WebElement element = (WebElement) lazyEntity.getWrappedEntity();
         String[] classes = element.getAttribute("class").split(" ");

@@ -1,7 +1,6 @@
 package core.wrappers.element;
 
 import core.wrappers.LazyEntity;
-import core.wrappers.element.LazyElement;
 import org.openqa.selenium.WebElement;
 
 public class LazyWrappedWebElement extends LazyElement {

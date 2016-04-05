@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static core.WaitFor.applyWithExceptionsCatching;
+
 
 
 public class LazyFilteredCollection extends LazyCollection {
@@ -29,7 +29,7 @@ public class LazyFilteredCollection extends LazyCollection {
         List<WebElement> resultList = new ArrayList<WebElement>();
 
         for (WebElement element : list) {
-            if (applyWithExceptionsCatching(new LazyWrappedWebElement(this, element), condition) != null)
+            if (condition.apply(new LazyWrappedWebElement(this, element)) != null)
                 resultList.add(element);
         }
 

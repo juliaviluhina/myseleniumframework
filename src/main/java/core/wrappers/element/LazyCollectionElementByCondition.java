@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static core.WaitFor.applyWithExceptionsCatching;
 
 
 public class LazyCollectionElementByCondition extends LazyElement {
@@ -28,7 +27,7 @@ public class LazyCollectionElementByCondition extends LazyElement {
         List<WebElement> list = parentCollection.getWrappedEntity();
 
         for (WebElement element : list) {
-            if (applyWithExceptionsCatching(new LazyWrappedWebElement(this, element), condition) != null)
+            if (condition.apply(new LazyWrappedWebElement(this, element)) != null)
                 return element;
         }
 

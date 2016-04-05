@@ -21,17 +21,17 @@ public class Text extends CustomElementCondition {
         return text;
     }
 
-    public WebElement apply(LazyEntity lazyEntity) {
+    public WebElement check(LazyEntity lazyEntity) {
         this.lazyEntity = lazyEntity;
         WebElement element = (WebElement) lazyEntity.getWrappedEntity();
         currentText = element.getText();
-        if (!check()) {
+        if (!checkElement()) {
             return null;
         }
         return element;
     }
 
-    protected boolean check() {
+    protected boolean checkElement() {
         return currentText.contains(text);
     }
 

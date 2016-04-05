@@ -25,7 +25,7 @@ public class ListNthElementHasText extends CustomCollectionCondition {
         return text;
     }
 
-    public WebElement apply(LazyEntity lazyEntity) {
+    public WebElement check(LazyEntity lazyEntity) {
         this.lazyEntity = lazyEntity;
         List<WebElement> elements = (List<WebElement>) lazyEntity.getWrappedEntity();
         WebElement element = elements.get(index);

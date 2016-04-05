@@ -14,7 +14,7 @@ public class ElementVisible extends CustomElementCondition {
         return "visible";
     }
 
-    public WebElement apply(LazyEntity lazyEntity) {
+    public WebElement check(LazyEntity lazyEntity) {
         this.lazyEntity = lazyEntity;
         WebElement element = (WebElement) lazyEntity.getWrappedEntity();
         return element.isDisplayed() ? element : null;

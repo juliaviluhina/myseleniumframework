@@ -6,7 +6,7 @@ public class ExactText extends Text {
         super(text);
     }
 
-    protected boolean check() {
+    protected boolean checkElement() {
         return currentText.equals(text);
     }
 }

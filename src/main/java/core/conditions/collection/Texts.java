@@ -25,7 +25,7 @@ public class Texts extends CustomCollectionCondition {
         return Arrays.toString(texts);
     }
 
-    public List<WebElement> apply(LazyEntity lazyEntity) {
+    public List<WebElement> check(LazyEntity lazyEntity) {
         this.lazyEntity = lazyEntity;
         List<WebElement> elements = (List<WebElement>) lazyEntity.getWrappedEntity();
         currentTexts = new ArrayList<String>();
