@@ -1,6 +1,6 @@
 package core;
 
-import core.conditions.CustomConditionInterface;
+import core.conditions.Condition;
 import core.wrappers.LazyEntity;
 
 import static core.ConciseAPI.sleep;
@@ -14,38 +14,46 @@ public class WaitFor {
         this.lazyEntity = lazyEntity;
     }
 
-    public static <V> V until(LazyEntity lazyEntity, int timeoutMs, CustomConditionInterface<V>... conditions) {
+    public static <V> V until(LazyEntity lazyEntity, int timeoutMs, Condition<V>... conditions) {
         return new WaitFor(lazyEntity).until(timeoutMs, conditions);
     }
 
-    public static <V> V until(LazyEntity lazyEntity, CustomConditionInterface<V>... conditions) {
+    public static <V> V until(LazyEntity lazyEntity, Condition<V>... conditions) {
         return until(lazyEntity, Configuration.timeout, conditions);
     }
 
+    public static boolean satisfied(LazyEntity lazyEntity, int timeoutMs, Condition... conditions){
+        return new WaitFor(lazyEntity).satisfied(timeoutMs, conditions);
+    }
 
-    public <V> V until(int timeoutMs, CustomConditionInterface<V>... conditions) {
+    public <V> V until(int timeoutMs, Condition<V>... conditions) {
         V result = null;
-        for (CustomConditionInterface<V> condition : conditions) {
-            result = is(timeoutMs, condition);
-            if (result == null)
-                throw new TimeoutException(condition, timeoutMs);
+        for (Condition<V> condition : conditions) {
+            result = until(timeoutMs, condition);
         }
         return result;
     }
 
-    public <V> V is(int timeoutMs, CustomConditionInterface<V> condition) {
+    public <V> V until(int timeoutMs, Condition<V> condition) {
         final long startTime = System.currentTimeMillis();
         do {
-            V results = condition.apply(lazyEntity);
-            if (results == null) {
+            V result = condition.apply(lazyEntity);
+            if (result == null) {
                 sleep(Configuration.pollingIntervalInMillis);
                 continue;
             }
-            return results;
-        }
-        while (System.currentTimeMillis() - startTime < timeoutMs);
-        return null;
+            return result;
+        } while (System.currentTimeMillis() - startTime < timeoutMs);
+
+        throw new TimeoutException("\nfailed while waiting " + timeoutMs / 1000 + " seconds" + "\nto assert " + condition);
     }
 
-
+    public boolean satisfied(int timeoutMs, Condition... conditions) {
+        try {
+            until(timeoutMs, conditions);
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
 }

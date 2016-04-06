@@ -1,6 +1,5 @@
 package core.conditions.collection;
 
-import java.util.Arrays;
 
 public class ExactTexts extends Texts {
 

@@ -1,12 +1,11 @@
 package core.conditions.collection;
 
-import core.conditions.CustomCollectionCondition;
-import core.wrappers.LazyEntity;
+import core.conditions.CollectionCondition;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class ListNthElementHasText extends CustomCollectionCondition {
+public class ListNthElementHasText extends CollectionCondition {
 
     private String currentText;
     protected final String text;
@@ -25,10 +24,8 @@ public class ListNthElementHasText extends CustomCollectionCondition {
         return text;
     }
 
-    public WebElement check(LazyEntity lazyEntity) {
-        this.lazyEntity = lazyEntity;
-        List<WebElement> elements = (List<WebElement>) lazyEntity.getWrappedEntity();
-        WebElement element = elements.get(index);
+    protected WebElement check() {
+        WebElement element = wrappedEntity.get(index);
         currentText = element.getText();
         return (currentText.contains(text)) ? element : null;
     }

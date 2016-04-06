@@ -1,15 +1,15 @@
 package pages.gmail;
 
-import core.wrappers.collection.LazyCollection;
+import core.wrappers.collection.AbstractLazyCollection;
 import org.openqa.selenium.By;
 
 import static core.ConciseAPI.*;
-import static core.conditions.CustomCollectionConditions.listNthElementHasText;
-import static core.conditions.CustomCollectionConditions.texts;
+import static core.conditions.CollectionConditions.listNthElementHasText;
+import static core.conditions.CollectionConditions.texts;
 
 public class Mails {
 
-    public static LazyCollection emails = $$("[role='main'] .zA");
+    public static AbstractLazyCollection emails = $$("[role='main'] .zA");
 
     public static void send(String email, String subject) {
         $(byText("COMPOSE")).click();

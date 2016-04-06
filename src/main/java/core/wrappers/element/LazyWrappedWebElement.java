@@ -3,7 +3,7 @@ package core.wrappers.element;
 import core.wrappers.LazyEntity;
 import org.openqa.selenium.WebElement;
 
-public class LazyWrappedWebElement extends LazyElement {
+public class LazyWrappedWebElement extends AbstractLazyElement {
 
     WebElement element;
     LazyEntity parentEntity;

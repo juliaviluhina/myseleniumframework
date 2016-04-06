@@ -1,14 +1,13 @@
 package core.conditions.collection;
 
-import core.conditions.CustomCollectionCondition;
-import core.wrappers.LazyEntity;
+import core.conditions.CollectionCondition;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Texts extends CustomCollectionCondition {
+public class Texts extends CollectionCondition {
 
     protected List<String> currentTexts;
     protected String[] texts;
@@ -25,12 +24,10 @@ public class Texts extends CustomCollectionCondition {
         return Arrays.toString(texts);
     }
 
-    public List<WebElement> check(LazyEntity lazyEntity) {
-        this.lazyEntity = lazyEntity;
-        List<WebElement> elements = (List<WebElement>) lazyEntity.getWrappedEntity();
+    protected List<WebElement> check() {
         currentTexts = new ArrayList<String>();
-        for (int i = 0; i < elements.size(); ++i) {
-            currentTexts.add(i, elements.get(i).getText());
+        for (int i = 0; i < wrappedEntity.size(); ++i) {
+            currentTexts.add(i, wrappedEntity.get(i).getText());
         }
         if (currentTexts.size() != texts.length) {
             return null;
@@ -40,11 +37,13 @@ public class Texts extends CustomCollectionCondition {
                     return null;
                 }
             }
-            return elements;
+            return wrappedEntity;
         }
     }
 
     protected boolean checkElement(int index) {
         return currentTexts.get(index).contains(texts[index]);
     }
+
+
 }

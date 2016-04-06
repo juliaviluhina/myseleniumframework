@@ -1,12 +1,10 @@
 package todomvc;
 
-import core.wrappers.element.LazyElement;
 import org.junit.Test;
 import testconfig.BaseTest;
 
 import static core.ConciseAPI.$;
-import static core.conditions.CustomCollectionConditions.texts;
-import static core.conditions.CustomElementConditions.text;
+import static core.conditions.CollectionConditions.texts;
 import static pages.todomvc.ToDoMVC.Task.Status;
 import static pages.todomvc.ToDoMVC.Task.Status.ACTIVE;
 import static pages.todomvc.ToDoMVC.Task.Status.COMPLETED;
@@ -78,19 +76,19 @@ public class TodoMVCTest extends BaseTest {
         assertTasks("a", "b edited");
         assertItemsLeft(2);
     }
+
+    @Test
+    public void test1() {
+        givenAtAll(ACTIVE, "аb", "ааb");
+
+//        tasks.filter(visible()).filter(text("a")).filter(text("b")).shouldHave(size(2));
 //
-//    @Test
-//    public void test1() {
-//        givenAtAll(ACTIVE, "аb", "ааb");
-//
-////        tasks.filter(visible()).filter(text("a")).filter(text("b")).shouldHave(size(2));
-////
-////        for (LazyElement element:tasks) {
-////            System.out.println(element.getText());
-////            element.shouldHave(text("а"));
-////        }
-//
-//        $("#todo-list").findAll("li").shouldHave(texts("аba", "ааb"));
-//    }
+//        for (LazyElement element:tasks) {
+//            System.out.println(element.getText());
+//            element.shouldHave(text("а"));
+//        }
+
+        $("#todo-list").findAll("li").shouldHave(texts("аba", "ааb"));
+    }
 
 }

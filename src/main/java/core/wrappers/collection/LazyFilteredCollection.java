@@ -1,6 +1,6 @@
 package core.wrappers.collection;
 
-import core.conditions.CustomElementCondition;
+import core.conditions.ElementCondition;
 import core.wrappers.element.LazyWrappedWebElement;
 import org.openqa.selenium.WebElement;
 
@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LazyFilteredCollection extends LazyCollection {
+public class LazyFilteredCollection extends AbstractLazyCollection {
 
-    private CustomElementCondition condition;
-    private LazyCollection parentCollection;
+    private ElementCondition condition;
+    private AbstractLazyCollection parentCollection;
 
-    public LazyFilteredCollection(LazyCollection parentCollection, CustomElementCondition condition) {
+    public LazyFilteredCollection(AbstractLazyCollection parentCollection, ElementCondition condition) {
         this.parentCollection = parentCollection;
         this.condition = condition;
     }
@@ -27,8 +27,9 @@ public class LazyFilteredCollection extends LazyCollection {
         List<WebElement> resultList = new ArrayList<WebElement>();
 
         for (WebElement element : list) {
-            if (condition.apply(new LazyWrappedWebElement(this, element)) != null)
+            if (new LazyWrappedWebElement(this, element).is(condition)) {
                 resultList.add(element);
+            }
         }
 
         return resultList;

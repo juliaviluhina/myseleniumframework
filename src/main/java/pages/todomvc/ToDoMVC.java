@@ -1,22 +1,22 @@
 package pages.todomvc;
 
-import core.wrappers.collection.LazyCollection;
-import core.wrappers.element.LazyElement;
+import core.wrappers.collection.AbstractLazyCollection;
+import core.wrappers.element.AbstractLazyElement;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static core.ConciseAPI.*;
-import static core.conditions.CustomCollectionConditions.empty;
-import static core.conditions.CustomCollectionConditions.exactTexts;
-import static core.conditions.CustomElementConditions.*;
+import static core.conditions.CollectionConditions.empty;
+import static core.conditions.CollectionConditions.exactTexts;
+import static core.conditions.ElementConditions.*;
 import static pages.todomvc.ToDoMVC.Task.Status;
 
 public class ToDoMVC {
-    public static LazyCollection tasks = $$("#todo-list li"); //$("#todo-list").findAll("li");
+    public static AbstractLazyCollection tasks = $$("#todo-list li"); //$("#todo-list").findAll("li");
 
-    public static LazyElement newTask = $("#new-todo");
+    public static AbstractLazyElement newTask = $("#new-todo");
 
     public static void add(String... taskTexts) {
         for (String text : taskTexts) {
@@ -40,7 +40,7 @@ public class ToDoMVC {
         $("#toggle-all").click();
     }
 
-    public static LazyElement startEditing(String oldText, String newText) {
+    public static AbstractLazyElement startEditing(String oldText, String newText) {
         tasks.find(exactText(oldText)).find("label").doubleClick();
         return tasks.find(cssClass("editing")).find(".edit").setValue(newText);
     }

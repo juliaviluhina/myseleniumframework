@@ -5,14 +5,14 @@ import org.openqa.selenium.WebElement;
 
 import core.WaitFor;
 
-import static core.conditions.CustomElementConditions.visible;
+import static core.conditions.ElementConditions.visible;
 
-public class LazyCollectionElementByInnerLocator extends LazyElement {
+public class LazyElementInnerElement extends AbstractLazyElement {
 
     private By innerLocator;
-    private LazyElement parentElement;
+    private AbstractLazyElement parentElement;
 
-    public LazyCollectionElementByInnerLocator(LazyElement parentElement, By innerLocator) {
+    public LazyElementInnerElement(AbstractLazyElement parentElement, By innerLocator) {
         this.parentElement = parentElement;
         this.innerLocator = innerLocator;
     }

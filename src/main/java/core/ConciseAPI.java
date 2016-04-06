@@ -1,9 +1,8 @@
 package core;
 
 import core.wrappers.collection.LazyCollection;
-import core.wrappers.collection.LazyCollectionByLocator;
+import core.wrappers.element.AbstractLazyElement;
 import core.wrappers.element.LazyElement;
-import core.wrappers.element.LazyElementByLocator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -26,7 +25,7 @@ public class ConciseAPI {
     }
 
     public static LazyElement $(By locator) {
-        return new LazyElementByLocator(locator);
+        return new LazyElement(locator);
     }
 
     public static LazyElement $(String cssSelector) {
@@ -34,7 +33,7 @@ public class ConciseAPI {
     }
 
     public static LazyCollection $$(By locator) {
-        return new LazyCollectionByLocator(locator);
+        return new LazyCollection(locator);
     }
 
     public static LazyCollection $$(String cssSelector) {

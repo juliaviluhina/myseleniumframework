@@ -1,10 +1,9 @@
 package core.conditions.element;
 
-import core.conditions.CustomElementCondition;
-import core.wrappers.LazyEntity;
+import core.conditions.ElementCondition;
 import org.openqa.selenium.WebElement;
 
-public class Text extends CustomElementCondition {
+public class Text extends ElementCondition {
 
     protected String currentText;
     protected String text;
@@ -21,14 +20,12 @@ public class Text extends CustomElementCondition {
         return text;
     }
 
-    public WebElement check(LazyEntity lazyEntity) {
-        this.lazyEntity = lazyEntity;
-        WebElement element = (WebElement) lazyEntity.getWrappedEntity();
-        currentText = element.getText();
+    public WebElement check() {
+        currentText = wrappedEntity.getText();
         if (!checkElement()) {
             return null;
         }
-        return element;
+        return wrappedEntity;
     }
 
     protected boolean checkElement() {

@@ -1,13 +1,12 @@
 package core.conditions.element;
 
-import core.conditions.CustomElementCondition;
-import core.wrappers.LazyEntity;
+import core.conditions.ElementCondition;
 import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 
 
-public class CssClass extends CustomElementCondition {
+public class CssClass extends ElementCondition {
 
     protected final String cssClass;
     String[] classes;
@@ -24,13 +23,11 @@ public class CssClass extends CustomElementCondition {
         return cssClass;
     }
 
-    public WebElement check(LazyEntity lazyEntity) {
-        this.lazyEntity = lazyEntity;
-        WebElement element = (WebElement) lazyEntity.getWrappedEntity();
-        String[] classes = element.getAttribute("class").split(" ");
+    protected WebElement check() {
+        String[] classes = wrappedEntity.getAttribute("class").split(" ");
         for (int i = 0; i < classes.length; i++) {
             if (classes[i].equals(cssClass)) {
-                return element;
+                return wrappedEntity;
             }
         }
         return null;
