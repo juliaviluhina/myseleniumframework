@@ -8,15 +8,15 @@ public class Present extends ElementCondition {
 
     private boolean isPresent;
 
-    public String actual() {
+    protected String actual() {
         return isPresent ? "not " : "" + "present";
     }
 
-    public String expected() {
+    protected String expected() {
         return "present";
     }
 
-    public WebElement check(WebElement element) {
+    protected WebElement check(WebElement element) {
         isPresent = (element != null);
         return element;
     }

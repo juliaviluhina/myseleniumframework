@@ -7,25 +7,27 @@ import java.util.List;
 
 public class Size extends CollectionCondition {
 
-    private int listSize;
-    protected final int expectedSize;
+    protected int listSize;
+    protected int expectedSize;
 
     public Size(int expectedSize) {
         this.expectedSize = expectedSize;
     }
 
-    public String actual() {
+    protected String actual() {
         return Integer.toString(listSize);
     }
 
-    public String expected() {
+    protected String expected() {
         return Integer.toString(expectedSize);
     }
 
     protected List<WebElement> check(List<WebElement> elements) {
         listSize = elements.size();
-        return (listSize == expectedSize) ? elements : null;
+        return checkList() ? elements : null;
     }
 
-
+    protected boolean checkList() {
+        return listSize == expectedSize;
+    }
 }

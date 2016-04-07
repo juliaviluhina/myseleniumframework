@@ -7,15 +7,15 @@ public class Visible extends ElementCondition {
 
     private boolean isDisplayed;
 
-    public String actual() {
+    protected String actual() {
         return isDisplayed ? "visible" : "invisible";
     }
 
-    public String expected() {
+    protected String expected() {
         return "visible";
     }
 
-    public WebElement check(WebElement element) {
+    protected WebElement check(WebElement element) {
         isDisplayed = element.isDisplayed();
         return isDisplayed ? element : null;
     }

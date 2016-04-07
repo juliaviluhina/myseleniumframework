@@ -4,13 +4,9 @@ package core.conditions;
 import core.wrappers.LazyEntity;
 import org.openqa.selenium.WebDriverException;
 
-public abstract class AbstractCondition<T> implements Condition<T> {
+public abstract class EntityCondition<T> implements Condition<T> {
 
     protected LazyEntity lazyEntity;
-
-    public LazyEntity entity() {
-        return lazyEntity;
-    }
 
     protected abstract T check(T entity);
 
@@ -23,9 +19,15 @@ public abstract class AbstractCondition<T> implements Condition<T> {
         }
     }
 
+    protected abstract String identity();
+
+    protected abstract String actual();
+
+    protected abstract String expected();
+
     public String toString() {
         return getClass().getSimpleName() +
-                "\nfor " + identity() + " found by: " + entity() +
+                "\nfor " + identity() + " found by: " + lazyEntity +
                 (expected() == "" ? "" : "\nexpected " + expected()) +
                 (actual() == "" ? "" : "\nactual " + actual());
     }

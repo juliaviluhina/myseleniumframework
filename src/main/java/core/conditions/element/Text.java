@@ -12,15 +12,15 @@ public class Text extends ElementCondition {
         this.text = text;
     }
 
-    public String actual() {
+    protected String actual() {
         return currentText;
     }
 
-    public String expected() {
+    protected String expected() {
         return text;
     }
 
-    public WebElement check(WebElement element) {
+    protected WebElement check(WebElement element) {
         currentText = element.getText();
         if (!checkElement()) {
             return null;

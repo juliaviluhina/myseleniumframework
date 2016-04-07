@@ -4,9 +4,9 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public abstract class CollectionCondition extends AbstractCondition<List<WebElement>> {
+public abstract class CollectionCondition extends EntityCondition<List<WebElement>> {
 
-    public String identity() {
+    protected String identity() {
         return "elements";
     }
 

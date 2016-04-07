@@ -9,21 +9,21 @@ import java.util.Arrays;
 public class CssClass extends ElementCondition {
 
     protected final String cssClass;
-    String[] classes;
+    protected String[] classes;
 
     public CssClass(String cssClass) {
         this.cssClass = cssClass;
     }
 
-    public String actual() {
+    protected String actual() {
         return Arrays.toString(classes);
     }
 
-    public String expected() {
+    protected String expected() {
         return cssClass;
     }
 
-    public WebElement check(WebElement element) {
+    protected WebElement check(WebElement element) {
         String[] classes = element.getAttribute("class").split(" ");
         for (int i = 0; i < classes.length; i++) {
             if (classes[i].equals(cssClass)) {
@@ -32,6 +32,5 @@ public class CssClass extends ElementCondition {
         }
         return null;
     }
-
 
 }

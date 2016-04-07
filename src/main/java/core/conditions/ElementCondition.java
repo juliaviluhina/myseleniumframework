@@ -2,9 +2,9 @@ package core.conditions;
 
 import org.openqa.selenium.WebElement;
 
-public abstract class ElementCondition extends AbstractCondition<WebElement> {
+public abstract class ElementCondition extends EntityCondition<WebElement> {
 
-    public String identity() {
+    protected String identity() {
         return "element";
     }
 }
