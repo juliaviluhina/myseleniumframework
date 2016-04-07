@@ -15,11 +15,11 @@ public class CssClass extends ElementCondition {
         this.cssClass = cssClass;
     }
 
-    protected String actual() {
+    public String actual() {
         return Arrays.toString(classes);
     }
 
-    protected String expected() {
+    public String expected() {
         return cssClass;
     }
 

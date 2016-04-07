@@ -8,11 +8,11 @@ public class Present extends ElementCondition {
 
     private boolean isPresent;
 
-    protected String actual() {
+    public String actual() {
         return isPresent ? "not " : "" + "present";
     }
 
-    protected String expected() {
+    public String expected() {
         return "present";
     }
 

@@ -7,11 +7,11 @@ public class Visible extends ElementCondition {
 
     private boolean isDisplayed;
 
-    protected String actual() {
+    public String actual() {
         return isDisplayed ? "visible" : "invisible";
     }
 
-    protected String expected() {
+    public String expected() {
         return "visible";
     }
 

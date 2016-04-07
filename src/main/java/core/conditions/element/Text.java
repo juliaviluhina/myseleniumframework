@@ -12,11 +12,11 @@ public class Text extends ElementCondition {
         this.text = text;
     }
 
-    protected String actual() {
+    public String actual() {
         return currentText;
     }
 
-    protected String expected() {
+    public String expected() {
         return text;
     }
 

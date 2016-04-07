@@ -14,11 +14,11 @@ public class Size extends CollectionCondition {
         this.expectedSize = expectedSize;
     }
 
-    protected String actual() {
+    public String actual() {
         return Integer.toString(listSize);
     }
 
-    protected String expected() {
+    public String expected() {
         return Integer.toString(expectedSize);
     }
 
