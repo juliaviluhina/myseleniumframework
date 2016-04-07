@@ -4,11 +4,11 @@ import org.openqa.selenium.*;
 
 import static core.ConciseAPI.*;
 
-public class LazyElement extends AbstractLazyElement {
+public class LazyWebdriverElement extends AbstractLazyElement {
 
     protected By locator;
 
-    public LazyElement(By locator) {
+    public LazyWebdriverElement(By locator) {
         this.locator = locator;
     }
 

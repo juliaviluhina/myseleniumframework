@@ -16,7 +16,7 @@ import java.util.List;
 import core.WaitFor;
 
 
-public abstract class AbstractLazyCollection implements LazyEntity, Iterable<AbstractLazyElement> {
+public abstract class AbstractLazyCollection implements LazyCollection {
 
     public abstract List<WebElement> getWrappedEntity();
 
@@ -32,16 +32,16 @@ public abstract class AbstractLazyCollection implements LazyEntity, Iterable<Abs
         return new LazyCollectionNthElement(this, index);
     }
 
-    public AbstractLazyCollection should(CollectionCondition... conditions) {
+    public LazyCollection should(CollectionCondition... conditions) {
         WaitFor.until(this, conditions);
         return this;
     }
 
-    public AbstractLazyCollection shouldBe(CollectionCondition... conditions) {
+    public LazyCollection shouldBe(CollectionCondition... conditions) {
         return should(conditions);
     }
 
-    public AbstractLazyCollection shouldHave(CollectionCondition... conditions) {
+    public LazyCollection shouldHave(CollectionCondition... conditions) {
         return should(conditions);
     }
 
@@ -53,8 +53,8 @@ public abstract class AbstractLazyCollection implements LazyEntity, Iterable<Abs
         return getWrappedEntity().isEmpty();
     }
 
-    public Iterator<AbstractLazyElement> iterator() {
-        List<AbstractLazyElement> list = new ArrayList<>();
+    public Iterator<LazyElement> iterator() {
+        List<LazyElement> list = new ArrayList<>();
         for (WebElement element : getWrappedEntity()) {
             list.add(new LazyWrappedWebElement(this, element));
         }

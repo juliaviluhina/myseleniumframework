@@ -1,42 +1,42 @@
 package core.wrappers.element;
 
 import core.conditions.ElementCondition;
-import core.wrappers.LazyEntity;
+import core.wrappers.LazyCollection;
+import core.wrappers.LazyElement;
 import core.wrappers.collection.LazyElementInnerCollection;
 import org.openqa.selenium.*;
 
 import java.util.List;
 
-import static core.ConciseAPI.actions;
-import static core.ConciseAPI.byCSS;
-
 import core.WaitFor;
 
+import static core.ConciseAPI.actions;
+import static core.ConciseAPI.byCSS;
 import static core.conditions.ElementConditions.present;
 import static core.conditions.ElementConditions.visible;
 
 
-public abstract class AbstractLazyElement implements LazyEntity, WebElement {
+public abstract class AbstractLazyElement implements LazyElement {
 
     public abstract WebElement getWrappedEntity();
 
-    public LazyElementInnerElement find(By innerLocator) {
+    public LazyElement find(By innerLocator) {
         return new LazyElementInnerElement(this, innerLocator);
     }
 
-    public LazyElementInnerElement find(String cssSelector) {
+    public LazyElement find(String cssSelector) {
         return find(byCSS(cssSelector));
     }
 
-    public LazyElementInnerCollection findAll(By innerLocator) {
+    public LazyCollection findAll(By innerLocator) {
         return new LazyElementInnerCollection(this, innerLocator);
     }
 
-    public LazyElementInnerCollection findAll(String cssSelector) {
+    public LazyCollection findAll(String cssSelector) {
         return findAll(byCSS(cssSelector));
     }
 
-    public AbstractLazyElement setValue(String text) {
+    public LazyElement setValue(String text) {
         WaitFor.until(this, visible());
 
         getWrappedEntity().clear();
@@ -44,7 +44,7 @@ public abstract class AbstractLazyElement implements LazyEntity, WebElement {
         return this;
     }
 
-    public AbstractLazyElement sendKeys(String text) {
+    public LazyElement sendKeys(String text) {
         WaitFor.until(this, visible());
 
         getWrappedEntity().sendKeys(text);
@@ -63,53 +63,53 @@ public abstract class AbstractLazyElement implements LazyEntity, WebElement {
         getWrappedEntity().click();
     }
 
-    public AbstractLazyElement pressEnter() {
+    public LazyElement pressEnter() {
         WaitFor.until(this, visible());
 
         getWrappedEntity().sendKeys(Keys.ENTER);
         return this;
     }
 
-    public AbstractLazyElement pressEscape() {
+    public LazyElement pressEscape() {
         WaitFor.until(this, visible());
 
         getWrappedEntity().sendKeys(Keys.ESCAPE);
         return this;
     }
 
-    public AbstractLazyElement hover() {
+    public LazyElement hover() {
         WaitFor.until(this, visible());
 
         actions().moveToElement(getWrappedEntity()).perform();
         return this;
     }
 
-    public AbstractLazyElement doubleClick() {
+    public LazyElement doubleClick() {
         WaitFor.until(this, visible());
 
         actions().doubleClick(getWrappedEntity()).perform();
         return this;
     }
 
-    public AbstractLazyElement should(ElementCondition... conditions) {
+    public LazyElement should(ElementCondition... conditions) {
         WaitFor.until(this, conditions);
         return this;
     }
 
-    public AbstractLazyElement shouldBe(ElementCondition... conditions) {
+    public LazyElement shouldBe(ElementCondition... conditions) {
         return should(conditions);
     }
 
-    public AbstractLazyElement shouldHave(ElementCondition... conditions) {
+    public LazyElement shouldHave(ElementCondition... conditions) {
         return should(conditions);
     }
 
     public boolean is(ElementCondition condition) {
-        return (condition.apply(this) != null) ;
+        return (condition.apply(this) != null);
     }
 
     public boolean has(ElementCondition condition) {
-        return is(condition) ;
+        return is(condition);
     }
 
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {

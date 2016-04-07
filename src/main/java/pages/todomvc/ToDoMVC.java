@@ -1,5 +1,7 @@
 package pages.todomvc;
 
+import core.wrappers.LazyCollection;
+import core.wrappers.LazyElement;
 import core.wrappers.collection.AbstractLazyCollection;
 import core.wrappers.element.AbstractLazyElement;
 import org.openqa.selenium.By;
@@ -14,9 +16,9 @@ import static core.conditions.ElementConditions.*;
 import static pages.todomvc.ToDoMVC.Task.Status;
 
 public class ToDoMVC {
-    public static AbstractLazyCollection tasks = $$("#todo-list li"); //$("#todo-list").findAll("li");
+    public static LazyCollection tasks = $$("#todo-list li"); //$("#todo-list").findAll("li");
 
-    public static AbstractLazyElement newTask = $("#new-todo");
+    public static LazyElement newTask = $("#new-todo");
 
     public static void add(String... taskTexts) {
         for (String text : taskTexts) {
@@ -40,7 +42,7 @@ public class ToDoMVC {
         $("#toggle-all").click();
     }
 
-    public static AbstractLazyElement startEditing(String oldText, String newText) {
+    public static LazyElement startEditing(String oldText, String newText) {
         tasks.find(exactText(oldText)).find("label").doubleClick();
         return tasks.find(cssClass("editing")).find(".edit").setValue(newText);
     }

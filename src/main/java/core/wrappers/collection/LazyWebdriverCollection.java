@@ -8,11 +8,11 @@ import java.util.*;
 
 import static core.ConciseAPI.getDriver;
 
-public class LazyCollection extends AbstractLazyCollection {
+public class LazyWebdriverCollection extends AbstractLazyCollection {
 
     protected By locator;
 
-    public LazyCollection(By locator) {
+    public LazyWebdriverCollection(By locator) {
         this.locator = locator;
     }
 
