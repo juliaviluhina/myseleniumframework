@@ -5,7 +5,7 @@ import core.wrappers.LazyEntity;
 
 public interface Condition<V> {
 
-    <V> V apply(LazyEntity lazyEntity);
+    V apply(LazyEntity lazyEntity);
 
     String identity();
 
