@@ -23,11 +23,11 @@ public class CssClass extends ElementCondition {
         return cssClass;
     }
 
-    protected WebElement check() {
-        String[] classes = wrappedEntity.getAttribute("class").split(" ");
+    public WebElement check(WebElement element) {
+        String[] classes = element.getAttribute("class").split(" ");
         for (int i = 0; i < classes.length; i++) {
             if (classes[i].equals(cssClass)) {
-                return wrappedEntity;
+                return element;
             }
         }
         return null;

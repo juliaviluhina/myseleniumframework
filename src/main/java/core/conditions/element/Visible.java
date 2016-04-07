@@ -15,9 +15,9 @@ public class Visible extends ElementCondition {
         return "visible";
     }
 
-    protected WebElement check() {
-        isDisplayed = wrappedEntity.isDisplayed();
-        return isDisplayed ? wrappedEntity : null;
+    public WebElement check(WebElement element) {
+        isDisplayed = element.isDisplayed();
+        return isDisplayed ? element : null;
     }
 
 

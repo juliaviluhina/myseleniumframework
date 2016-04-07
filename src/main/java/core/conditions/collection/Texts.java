@@ -24,10 +24,10 @@ public class Texts extends CollectionCondition {
         return Arrays.toString(texts);
     }
 
-    protected List<WebElement> check() {
+    protected List<WebElement> check(List<WebElement> elements) {
         currentTexts = new ArrayList<String>();
-        for (int i = 0; i < wrappedEntity.size(); ++i) {
-            currentTexts.add(i, wrappedEntity.get(i).getText());
+        for (int i = 0; i < elements.size(); ++i) {
+            currentTexts.add(i, elements.get(i).getText());
         }
         if (currentTexts.size() != texts.length) {
             return null;
@@ -37,7 +37,7 @@ public class Texts extends CollectionCondition {
                     return null;
                 }
             }
-            return wrappedEntity;
+            return elements;
         }
     }
 

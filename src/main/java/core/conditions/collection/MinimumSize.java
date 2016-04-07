@@ -25,9 +25,9 @@ public class MinimumSize extends CollectionCondition {
         return Integer.toString(expectedMinimumSize);
     }
 
-    protected List<WebElement> check() {
-        listSize = wrappedEntity.size();
-        return (listSize >= expectedMinimumSize) ? wrappedEntity : null;
+    protected List<WebElement> check(List<WebElement> elements) {
+        listSize = elements.size();
+        return (listSize >= expectedMinimumSize) ? elements : null;
     }
 
 

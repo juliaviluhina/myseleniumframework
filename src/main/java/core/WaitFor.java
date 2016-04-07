@@ -2,6 +2,7 @@ package core;
 
 import core.conditions.Condition;
 import core.wrappers.LazyEntity;
+import org.openqa.selenium.TimeoutException;
 
 import static core.ConciseAPI.sleep;
 

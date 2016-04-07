@@ -22,9 +22,9 @@ public class Size extends CollectionCondition {
         return Integer.toString(expectedSize);
     }
 
-    protected List<WebElement> check() {
-        listSize = wrappedEntity.size();
-        return (listSize == expectedSize) ? wrappedEntity : null;
+    protected List<WebElement> check(List<WebElement> elements) {
+        listSize = elements.size();
+        return (listSize == expectedSize) ? elements : null;
     }
 
 

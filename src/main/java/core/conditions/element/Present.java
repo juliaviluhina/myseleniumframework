@@ -15,8 +15,8 @@ public class Present extends ElementCondition {
         return "present";
     }
 
-    protected WebElement check() {
-        return wrappedEntity;
+    public WebElement check(WebElement element) {
+        return element;
     }
 
 }

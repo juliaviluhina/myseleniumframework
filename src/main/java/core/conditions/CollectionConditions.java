@@ -11,11 +11,6 @@ public class CollectionConditions {
         return new ExactTexts(texts);
     }
 
-    public static CollectionCondition listNthElementHasText(
-            final int index, final String text) {
-        return new ListNthElementHasText(index, text);
-    }
-
     public static CollectionCondition size(final int expectedSize) {
         return new Size(expectedSize);
     }

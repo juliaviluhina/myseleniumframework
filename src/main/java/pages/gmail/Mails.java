@@ -4,8 +4,8 @@ import core.wrappers.collection.AbstractLazyCollection;
 import org.openqa.selenium.By;
 
 import static core.ConciseAPI.*;
-import static core.conditions.CollectionConditions.listNthElementHasText;
 import static core.conditions.CollectionConditions.texts;
+import static core.conditions.ElementConditions.text;
 
 public class Mails {
 
@@ -23,6 +23,6 @@ public class Mails {
     }
 
     public static void assertMail(int index, String subject) {
-        emails.shouldHave(listNthElementHasText(index, subject));
+        emails.get(index).shouldHave(text(subject));
     }
 }

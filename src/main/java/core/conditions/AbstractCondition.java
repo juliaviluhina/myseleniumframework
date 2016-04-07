@@ -7,23 +7,17 @@ import org.openqa.selenium.WebDriverException;
 public abstract class AbstractCondition<V> implements Condition<V> {
 
     protected LazyEntity lazyEntity;
-    protected V wrappedEntity;
 
     public LazyEntity entity() {
         return lazyEntity;
     }
 
-    protected abstract <V> V check();
+    protected abstract V check(V entity);
 
-    private void setLazyEntity(LazyEntity lazyEntity) {
-        this.lazyEntity = lazyEntity;
-        wrappedEntity = (V) lazyEntity.getWrappedEntity();
-    }
-
-    public <V> V apply(LazyEntity lazyEntity) {
+    public V apply(LazyEntity lazyEntity) {
         try {
-            setLazyEntity(lazyEntity);
-            return check();
+            this.lazyEntity = lazyEntity;
+            return check((V) lazyEntity.getWrappedEntity());
         } catch (WebDriverException | IndexOutOfBoundsException e) {
             return null;
         }
