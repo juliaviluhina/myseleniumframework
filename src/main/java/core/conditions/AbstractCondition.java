@@ -4,7 +4,7 @@ package core.conditions;
 import core.wrappers.LazyEntity;
 import org.openqa.selenium.WebDriverException;
 
-public abstract class AbstractCondition<V> implements Condition<V> {
+public abstract class AbstractCondition<T> implements Condition<T> {
 
     protected LazyEntity lazyEntity;
 
@@ -12,12 +12,12 @@ public abstract class AbstractCondition<V> implements Condition<V> {
         return lazyEntity;
     }
 
-    protected abstract V check(V entity);
+    protected abstract T check(T entity);
 
-    public V apply(LazyEntity lazyEntity) {
+    public T apply(LazyEntity lazyEntity) {
         try {
             this.lazyEntity = lazyEntity;
-            return check((V) lazyEntity.getWrappedEntity());
+            return check((T) lazyEntity.getWrappedEntity());
         } catch (WebDriverException | IndexOutOfBoundsException e) {
             return null;
         }

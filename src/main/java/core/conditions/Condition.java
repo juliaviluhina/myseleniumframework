@@ -3,9 +3,9 @@ package core.conditions;
 
 import core.wrappers.LazyEntity;
 
-public interface Condition<V> {
+public interface Condition<T> {
 
-    V apply(LazyEntity lazyEntity);
+    T apply(LazyEntity lazyEntity);
 
     String identity();
 
