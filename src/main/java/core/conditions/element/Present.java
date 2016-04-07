@@ -5,10 +5,11 @@ import org.openqa.selenium.WebElement;
 
 
 public class Present extends ElementCondition {
-    private WebElement element;
+
+    private boolean isPresent;
 
     public String actual() {
-        return (element == null) ? "not " : "" + "present";
+        return isPresent ? "not " : "" + "present";
     }
 
     public String expected() {
@@ -16,6 +17,7 @@ public class Present extends ElementCondition {
     }
 
     public WebElement check(WebElement element) {
+        isPresent = (element != null);
         return element;
     }
 
