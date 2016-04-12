@@ -6,7 +6,7 @@ public class MinimumSize extends Size {
         super(expectedSize);
     }
 
-    protected boolean checkList() {
+    public boolean checkList() {
         return listSize >= expectedSize;
     }
 

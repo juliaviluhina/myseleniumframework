@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 
 public class Text extends ElementCondition {
 
-    protected String currentText;
-    protected String text;
+    public String currentText;
+    public String text;
 
     public Text(String text) {
         this.text = text;
@@ -20,7 +20,7 @@ public class Text extends ElementCondition {
         return text;
     }
 
-    protected WebElement check(WebElement element) {
+    public WebElement check(WebElement element) {
         currentText = element.getText();
         if (!checkElement()) {
             return null;

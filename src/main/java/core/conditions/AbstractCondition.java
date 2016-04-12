@@ -4,11 +4,11 @@ package core.conditions;
 import core.wrappers.LazyEntity;
 import org.openqa.selenium.WebDriverException;
 
-public abstract class AbstractEntityCondition<T> implements EntityCondition<T>, DescribesResult {
+public abstract class AbstractCondition<T> implements Condition<T>, DescribesResult {
 
-    protected LazyEntity lazyEntity;
+    private LazyEntity lazyEntity;
 
-    protected abstract T check(T entity);
+    public abstract T check(T entity);
 
     public T apply(LazyEntity lazyEntity) {
         try {

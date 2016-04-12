@@ -1,8 +1,10 @@
 package core.conditions;
 
+import core.conditions.ElementCondition;
 import core.conditions.element.*;
 
 public class ElementConditions {
+
     public static ElementCondition text(final String text) {
         return new Text(text);
     }
@@ -22,4 +24,5 @@ public class ElementConditions {
     public static ElementCondition present() {
         return new Present();
     }
+
 }

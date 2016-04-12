@@ -1,11 +1,8 @@
 package core;
 
-import core.conditions.EntityCondition;
+import core.conditions.Condition;
 import core.wrappers.LazyEntity;
 import org.openqa.selenium.TimeoutException;
-
-import static core.ConciseAPI.sleep;
-
 
 public class WaitFor {
 
@@ -15,32 +12,32 @@ public class WaitFor {
         this.lazyEntity = lazyEntity;
     }
 
-    public static <V> V until(LazyEntity lazyEntity, int timeoutMs, EntityCondition<V>... conditions) {
+    public static <V> V until(LazyEntity lazyEntity, int timeoutMs, Condition<V>... conditions) {
         return new WaitFor(lazyEntity).until(timeoutMs, conditions);
     }
 
-    public static <V> V until(LazyEntity lazyEntity, EntityCondition<V>... conditions) {
+    public static <V> V until(LazyEntity lazyEntity, Condition<V>... conditions) {
         return until(lazyEntity, Configuration.timeout, conditions);
     }
 
-    public static boolean satisfied(LazyEntity lazyEntity, int timeoutMs, EntityCondition... conditions){
+    public static boolean satisfied(LazyEntity lazyEntity, int timeoutMs, Condition... conditions){
         return new WaitFor(lazyEntity).satisfied(timeoutMs, conditions);
     }
 
-    public <V> V until(int timeoutMs, EntityCondition<V>... conditions) {
+    public <V> V until(int timeoutMs, Condition<V>... conditions) {
         V result = null;
-        for (EntityCondition<V> condition : conditions) {
+        for (Condition<V> condition : conditions) {
             result = until(timeoutMs, condition);
         }
         return result;
     }
 
-    public <V> V until(int timeoutMs, EntityCondition<V> condition) {
+    public <V> V until(int timeoutMs, Condition<V> condition) {
         final long startTime = System.currentTimeMillis();
         do {
             V result = condition.apply(lazyEntity);
             if (result == null) {
-                sleep(Configuration.pollingIntervalInMillis);
+                sleep(Configuration.pollingInterval);
                 continue;
             }
             return result;
@@ -49,12 +46,21 @@ public class WaitFor {
         throw new TimeoutException("\nfailed while waiting " + timeoutMs / 1000 + " seconds" + "\nto assert " + condition);
     }
 
-    public boolean satisfied(int timeoutMs, EntityCondition... conditions) {
+    public boolean satisfied(int timeoutMs, Condition... conditions) {
         try {
             until(timeoutMs, conditions);
             return true;
         } catch (TimeoutException e) {
             return false;
+        }
+    }
+
+    private void sleep(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
         }
     }
 }

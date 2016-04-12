@@ -127,7 +127,7 @@ public abstract class AbstractLazyElement implements LazyElement {
     public void sendKeys(CharSequence... charSequences) {
         WaitFor.until(this, visible());
 
-        getWrappedEntity().sendKeys();
+        getWrappedEntity().sendKeys(charSequences);
     }
 
     public String getTagName() {

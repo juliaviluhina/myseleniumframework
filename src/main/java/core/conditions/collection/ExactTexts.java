@@ -7,7 +7,7 @@ public class ExactTexts extends Texts {
         super(texts);
     }
 
-    protected boolean checkElement(int index) {
+    public boolean checkElement(int index) {
         return currentTexts.get(index).equals(texts[index]);
     }
 

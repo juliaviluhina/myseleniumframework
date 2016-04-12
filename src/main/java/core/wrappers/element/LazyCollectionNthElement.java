@@ -1,18 +1,16 @@
 package core.wrappers.element;
 
-import core.wrappers.collection.AbstractLazyCollection;
+import core.wrappers.LazyCollection;
 import org.openqa.selenium.WebElement;
 
-import core.WaitFor;
-
-import static core.conditions.CollectionConditions.minimumSize;
+import java.util.List;
 
 public class LazyCollectionNthElement extends AbstractLazyElement {
 
     private int index;
-    private AbstractLazyCollection parentCollection;
+    private LazyCollection parentCollection;
 
-    public LazyCollectionNthElement(AbstractLazyCollection parentCollection, int index) {
+    public LazyCollectionNthElement(LazyCollection parentCollection, int index) {
         this.parentCollection = parentCollection;
         this.index = index;
     }
@@ -22,8 +20,10 @@ public class LazyCollectionNthElement extends AbstractLazyElement {
     }
 
     public WebElement getWrappedEntity() {
-        WaitFor.until(parentCollection, minimumSize(index + 1));
-        return parentCollection.getWrappedEntity().get(index);
+        //WaitFor.until(parentCollection, minimumSize(index + 1));
+        //return parentCollection.getWrappedEntity().get(index);
+        List<WebElement> elements = parentCollection.getWrappedEntity();
+        return elements.size() >= (index+1) ? elements.get(index) : null;
     }
 
 }

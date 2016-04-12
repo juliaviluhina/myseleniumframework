@@ -1,8 +1,10 @@
 package core.conditions;
 
+import core.conditions.CollectionCondition;
 import core.conditions.collection.*;
 
 public class CollectionConditions {
+
     public static CollectionCondition texts(final String... texts) {
         return new Texts(texts);
     }

@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Texts extends CollectionCondition {
 
-    protected List<String> currentTexts;
-    protected String[] texts;
+    public List<String> currentTexts;
+    public String[] texts;
 
     public Texts(String... texts) {
         this.texts = texts;
@@ -24,7 +24,7 @@ public class Texts extends CollectionCondition {
         return Arrays.toString(texts);
     }
 
-    protected List<WebElement> check(List<WebElement> elements) {
+    public List<WebElement> check(List<WebElement> elements) {
         currentTexts = new ArrayList<String>();
         for (int i = 0; i < elements.size(); ++i) {
             currentTexts.add(i, elements.get(i).getText());
@@ -41,9 +41,8 @@ public class Texts extends CollectionCondition {
         }
     }
 
-    protected boolean checkElement(int index) {
+    public boolean checkElement(int index) {
         return currentTexts.get(index).contains(texts[index]);
     }
-
 
 }

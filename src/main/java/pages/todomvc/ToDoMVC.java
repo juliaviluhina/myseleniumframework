@@ -2,8 +2,6 @@ package pages.todomvc;
 
 import core.wrappers.LazyCollection;
 import core.wrappers.LazyElement;
-import core.wrappers.collection.AbstractLazyCollection;
-import core.wrappers.element.AbstractLazyElement;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;

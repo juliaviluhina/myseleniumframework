@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 
 public class LazyWrappedWebElement extends AbstractLazyElement {
 
-    WebElement element;
-    LazyEntity parentEntity;
+    private WebElement element;
+    private LazyEntity parentEntity;
 
     public LazyWrappedWebElement(LazyEntity parentEntity, WebElement element) {
         this.parentEntity = parentEntity;

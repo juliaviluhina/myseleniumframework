@@ -5,7 +5,6 @@ import core.conditions.ElementCondition;
 import core.wrappers.*;
 import core.wrappers.element.LazyCollectionFoundByConditionElement;
 import core.wrappers.element.LazyCollectionNthElement;
-import core.wrappers.element.AbstractLazyElement;
 import core.wrappers.element.LazyWrappedWebElement;
 import org.openqa.selenium.WebElement;
 
@@ -20,15 +19,15 @@ public abstract class AbstractLazyCollection implements LazyCollection {
 
     public abstract List<WebElement> getWrappedEntity();
 
-    public LazyCollectionFoundByConditionElement find(ElementCondition condition) {
+    public LazyElement find(ElementCondition condition) {
         return new LazyCollectionFoundByConditionElement(this, condition);
     }
 
-    public LazyFilteredCollection filter(ElementCondition condition) {
+    public LazyCollection filter(ElementCondition condition) {
         return new LazyFilteredCollection(this, condition);
     }
 
-    public LazyCollectionNthElement get(int index) {
+    public LazyElement get(int index) {
         return new LazyCollectionNthElement(this, index);
     }
 
@@ -59,6 +58,15 @@ public abstract class AbstractLazyCollection implements LazyCollection {
             list.add(new LazyWrappedWebElement(this, element));
         }
         return list.iterator();
+    }
+
+    public String[] getTexts() {
+        List<String> texts = new ArrayList<>();
+        List<WebElement> elements = getWrappedEntity();
+        for (WebElement element:elements) {
+            texts.add(element.getText());
+        }
+        return texts.toArray(new String[0]);
     }
 
 }

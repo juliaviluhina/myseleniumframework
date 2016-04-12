@@ -2,11 +2,15 @@ package todomvc;
 
 import core.wrappers.LazyElement;
 import org.junit.Test;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import testconfig.BaseTest;
 
-import static core.ConciseAPI.$;
-import static core.conditions.CollectionConditions.texts;
+import static core.ConciseAPI.*;
+import static core.conditions.CollectionConditions.size;
 import static core.conditions.ElementConditions.text;
+import static core.conditions.ElementConditions.visible;
+import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
 import static pages.todomvc.ToDoMVC.Task.Status;
 import static pages.todomvc.ToDoMVC.Task.Status.ACTIVE;
 import static pages.todomvc.ToDoMVC.Task.Status.COMPLETED;
@@ -81,16 +85,23 @@ public class TodoMVCTest extends BaseTest {
 
     @Test
     public void test1() {
-        givenAtAll(ACTIVE, "аb", "ааb");
+        givenAtAll(ACTIVE, "аb", "ааb", "ac", "bc");
+        //assertTasks("аb", "ааb", "ac", "bc");
 
-        //tasks.filter(visible()).filter(text("a")).filter(text("b")).shouldHave(size(2));
+//        System.out.println(Arrays.toString(tasks.filter(visible()).getTexts()));
+//        System.out.println(Arrays.toString(tasks.filter(visible()).filter(text("а")).getTexts()));
+//        System.out.println(Arrays.toString(tasks.filter(visible()).filter(text("а")).filter(text("b")).getTexts()));
+
+        tasks.filter(visible()).filter(text("а")).filter(text("b")).shouldHave(size(2));
 
         for (LazyElement element:tasks) {
             System.out.println(element.getText());
-            element.shouldHave(text("а"));
         }
+        ((WebElement) $("#new-todo")).sendKeys("kuku"+ Keys.ENTER);
+        assertTasks("аb", "ааb", "ac", "bc", "kuku");
 
-        $("#todo-list").findAll("li").shouldHave(texts("аba", "ааb"));
     }
+
+
 
 }

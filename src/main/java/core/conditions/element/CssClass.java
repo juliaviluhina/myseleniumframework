@@ -8,8 +8,8 @@ import java.util.Arrays;
 
 public class CssClass extends ElementCondition {
 
-    protected final String cssClass;
-    protected String[] classes;
+    public final String cssClass;
+    public String[] classes;
 
     public CssClass(String cssClass) {
         this.cssClass = cssClass;
@@ -23,7 +23,7 @@ public class CssClass extends ElementCondition {
         return cssClass;
     }
 
-    protected WebElement check(WebElement element) {
+    public WebElement check(WebElement element) {
         String[] classes = element.getAttribute("class").split(" ");
         for (int i = 0; i < classes.length; i++) {
             if (classes[i].equals(cssClass)) {
