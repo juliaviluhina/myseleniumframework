@@ -19,7 +19,6 @@ public class LazyElementInnerElement extends AbstractLazyElement {
     }
 
     public WebElement getWrappedEntity() {
-        //WaitFor.until(parentElement, visible());
         return parentElement.getWrappedEntity().findElement(innerLocator);
     }
 

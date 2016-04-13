@@ -16,8 +16,6 @@ public interface LazyElement extends LazyEntity<WebElement>, WebElement {
 
     LazyElement setValue(String text);
 
-    LazyElement sendKeys(String text);
-
     LazyElement pressEnter();
 
     LazyElement pressEscape();

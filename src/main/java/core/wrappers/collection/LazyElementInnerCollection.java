@@ -21,7 +21,6 @@ public class LazyElementInnerCollection extends AbstractLazyCollection {
     }
 
     public List<WebElement> getWrappedEntity() {
-        //WaitFor.until(parentElement, present());
         return parentElement.getWrappedEntity().findElements(innerLocator);
     }
 

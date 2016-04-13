@@ -20,10 +20,7 @@ public class LazyCollectionNthElement extends AbstractLazyElement {
     }
 
     public WebElement getWrappedEntity() {
-        //WaitFor.until(parentCollection, minimumSize(index + 1));
-        //return parentCollection.getWrappedEntity().get(index);
-        List<WebElement> elements = parentCollection.getWrappedEntity();
-        return elements.size() >= (index+1) ? elements.get(index) : null;
+        return parentCollection.getWrappedEntity().get(index);
     }
 
 }

@@ -36,31 +36,33 @@ public abstract class AbstractLazyElement implements LazyElement {
         return findAll(byCSS(cssSelector));
     }
 
+    public LazyElement should(ElementCondition... conditions) {
+        WaitFor.until(this, conditions);
+        return this;
+    }
+
+    public LazyElement shouldBe(ElementCondition... conditions) {
+        return should(conditions);
+    }
+
+    public LazyElement shouldHave(ElementCondition... conditions) {
+        return should(conditions);
+    }
+
+    public boolean is(ElementCondition condition) {
+        return (condition.apply(this) != null);
+    }
+
+    public boolean has(ElementCondition condition) {
+        return is(condition);
+    }
+
     public LazyElement setValue(String text) {
         WaitFor.until(this, visible());
 
         getWrappedEntity().clear();
         getWrappedEntity().sendKeys(text);
         return this;
-    }
-
-    public LazyElement sendKeys(String text) {
-        WaitFor.until(this, visible());
-
-        getWrappedEntity().sendKeys(text);
-        return this;
-    }
-
-    public void clear() {
-        WaitFor.until(this, visible());
-
-        getWrappedEntity().clear();
-    }
-
-    public void click() {
-        WaitFor.until(this, visible());
-
-        getWrappedEntity().click();
     }
 
     public LazyElement pressEnter() {
@@ -91,26 +93,18 @@ public abstract class AbstractLazyElement implements LazyElement {
         return this;
     }
 
-    public LazyElement should(ElementCondition... conditions) {
-        WaitFor.until(this, conditions);
-        return this;
+    public void clear() {
+        WaitFor.until(this, visible());
+
+        getWrappedEntity().clear();
     }
 
-    public LazyElement shouldBe(ElementCondition... conditions) {
-        return should(conditions);
+    public void click() {
+        WaitFor.until(this, visible());
+
+        getWrappedEntity().click();
     }
 
-    public LazyElement shouldHave(ElementCondition... conditions) {
-        return should(conditions);
-    }
-
-    public boolean is(ElementCondition condition) {
-        return (condition.apply(this) != null);
-    }
-
-    public boolean has(ElementCondition condition) {
-        return is(condition);
-    }
 
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
         WaitFor.until(this, visible());
@@ -125,8 +119,6 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public void sendKeys(CharSequence... charSequences) {
-        WaitFor.until(this, visible());
-
         getWrappedEntity().sendKeys(charSequences);
     }
 

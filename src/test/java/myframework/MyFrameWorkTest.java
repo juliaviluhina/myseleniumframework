@@ -35,10 +35,6 @@ public class MyFrameWorkTest extends BaseTest {
     public void testGetInCollection() {
         givenAtAll(ACTIVE, "аb", "ааb", "ac", "bc");
 
-//        System.out.println(Arrays.toString(tasks.filter(visible()).getTexts()));
-//        System.out.println(Arrays.toString(tasks.filter(visible()).filter(text("а")).getTexts()));
-//        System.out.println(Arrays.toString(tasks.filter(visible()).filter(text("а")).filter(text("b")).getTexts()));
-
         tasks.get(0).shouldHave(exactText("аb"));
 
         tasks.get(4).shouldHave(exactText("аb"));
