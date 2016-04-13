@@ -13,7 +13,11 @@ public abstract class AbstractCondition<T> implements Condition<T>, DescribesRes
     public T apply(LazyEntity lazyEntity) {
         try {
             this.lazyEntity = lazyEntity;
-            return check((T) lazyEntity.getWrappedEntity());
+            T wrappedEntity = (T) lazyEntity.getWrappedEntity();
+            if (wrappedEntity == null) {
+                return null;
+            }
+            return check(wrappedEntity);
         } catch (WebDriverException | IndexOutOfBoundsException e) {
             return null;
         }
