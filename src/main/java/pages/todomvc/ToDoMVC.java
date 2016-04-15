@@ -126,8 +126,8 @@ public class ToDoMVC {
         }
 
         public String getUrl() {
-            //return "https://todomvc4tasj.herokuapp.com/#" + Url2;
-            return "https://newtodos4tasj.herokuapp.com/#" + Url2;
+            return "https://todomvc4tasj.herokuapp.com/#" + Url2;
+            //return "https://newtodos4tasj.herokuapp.com/#" + Url2;
         }
     }
 
@@ -186,6 +186,10 @@ public class ToDoMVC {
             tasks[k] = new Task(names[k], status);
         }
         return tasks;
+    }
+
+    public static Task aTask(String name, Status status) {
+        return new Task(name, status);
     }
 
     public static void givenAtAll(Status status, String... tasks) {
