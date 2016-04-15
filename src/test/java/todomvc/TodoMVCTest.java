@@ -15,6 +15,15 @@ import static pages.todomvc.ToDoMVC.Task.aTask;
 public class TodoMVCTest extends BaseTest {
 
     @Test
+    public void testAddAtAll() {
+        givenAtAll(ToDoMVC.aTask("a", COMPLETED));
+
+        add("b");
+        assertTasks("a","b");
+        assertItemsLeft(1);
+    }
+
+    @Test
     public void testEditAtAll() {
         givenAtAll(ToDoMVC.aTask("a", COMPLETED));
 

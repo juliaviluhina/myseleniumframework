@@ -25,7 +25,7 @@ public class Text extends ElementCondition {
         return checkElement();
     }
 
-    protected boolean checkElement() {
+    public boolean checkElement() {
         return currentText.contains(text);
     }
 

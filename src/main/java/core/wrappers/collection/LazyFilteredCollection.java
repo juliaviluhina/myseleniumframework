@@ -28,7 +28,7 @@ public class LazyFilteredCollection extends AbstractLazyCollection {
         List<WebElement> resultList = new ArrayList<WebElement>();
 
         for (WebElement element : list) {
-            if (new LazyWrappedWebElement(this, element).is(condition)) {
+            if (condition.check(element)) {
                 resultList.add(element);
             }
         }

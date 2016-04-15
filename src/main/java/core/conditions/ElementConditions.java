@@ -25,4 +25,7 @@ public class ElementConditions {
         return new Present();
     }
 
+    public static ElementCondition enabled() {
+        return new Enabled();
+    }
 }
