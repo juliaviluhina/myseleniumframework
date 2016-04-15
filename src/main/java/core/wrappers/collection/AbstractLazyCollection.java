@@ -17,8 +17,6 @@ import core.WaitFor;
 
 public abstract class AbstractLazyCollection implements LazyCollection {
 
-    public abstract List<WebElement> getWrappedEntity();
-
     public LazyElement find(ElementCondition condition) {
         return new LazyCollectionFoundByConditionElement(this, condition);
     }

@@ -18,8 +18,6 @@ import static core.conditions.ElementConditions.visible;
 
 public abstract class AbstractLazyElement implements LazyElement {
 
-    public abstract WebElement getWrappedEntity();
-
     public LazyElement find(By innerLocator) {
         return new LazyElementInnerElement(this, innerLocator);
     }
@@ -58,64 +56,48 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public LazyElement setValue(String text) {
-        WaitFor.until(this, visible());
+        WebElement element = WaitFor.until(this, visible());
 
-        getWrappedEntity().clear();
-        getWrappedEntity().sendKeys(text);
+        element.clear();
+        element.sendKeys(text);
         return this;
     }
 
     public LazyElement pressEnter() {
-        WaitFor.until(this, visible());
-
-        getWrappedEntity().sendKeys(Keys.ENTER);
+        WaitFor.until(this, visible()).sendKeys(Keys.ENTER);
         return this;
     }
 
     public LazyElement pressEscape() {
-        WaitFor.until(this, visible());
-
-        getWrappedEntity().sendKeys(Keys.ESCAPE);
+        WaitFor.until(this, visible()).sendKeys(Keys.ESCAPE);
         return this;
     }
 
     public LazyElement hover() {
-        WaitFor.until(this, visible());
-
-        actions().moveToElement(getWrappedEntity()).perform();
+        actions().moveToElement(WaitFor.until(this, visible())).perform();
         return this;
     }
 
     public LazyElement doubleClick() {
-        WaitFor.until(this, visible());
-
-        actions().doubleClick(getWrappedEntity()).perform();
+        actions().doubleClick(WaitFor.until(this, visible())).perform();
         return this;
     }
 
     public void clear() {
-        WaitFor.until(this, visible());
-
-        getWrappedEntity().clear();
+        WaitFor.until(this, visible()).clear();
     }
 
     public void click() {
-        WaitFor.until(this, visible());
-
-        getWrappedEntity().click();
+        WaitFor.until(this, visible()).click();
     }
 
 
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
-        WaitFor.until(this, visible());
-
-        return getWrappedEntity().getScreenshotAs(outputType);
+       return WaitFor.until(this, visible()).getScreenshotAs(outputType);
     }
 
     public void submit() {
-        WaitFor.until(this, visible());
-
-        getWrappedEntity().submit();
+        WaitFor.until(this, visible()).submit();
     }
 
     public void sendKeys(CharSequence... charSequences) {
@@ -123,75 +105,52 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public String getTagName() {
-        WaitFor.until(this, present());
-
-        return getWrappedEntity().getTagName();
+        return WaitFor.until(this, present()).getTagName();
     }
 
     public String getAttribute(String s) {
-        WaitFor.until(this, present());
-
-        return getWrappedEntity().getAttribute(s);
+        return WaitFor.until(this, present()).getAttribute(s);
     }
 
     public boolean isSelected() {
-        WaitFor.until(this, visible());
-
-        return getWrappedEntity().isSelected();
+        return WaitFor.until(this, visible()).isSelected();
     }
 
     public boolean isEnabled() {
-        WaitFor.until(this, visible());
-
-        return getWrappedEntity().isEnabled();
+        return WaitFor.until(this, visible()).isEnabled();
     }
 
     public String getText() {
-        WaitFor.until(this, visible());
-
-        return getWrappedEntity().getText();
+        return WaitFor.until(this, visible()).getText();
     }
 
     public List<WebElement> findElements(By by) {
-        WaitFor.until(this, visible());
-
-        return getWrappedEntity().findElements(by);
+        return WaitFor.until(this, visible()).findElements(by);
     }
 
     public WebElement findElement(By by) {
-        WaitFor.until(this, visible());
-
-        return getWrappedEntity().findElement(by);
+        return WaitFor.until(this, visible()).findElement(by);
     }
 
     public boolean isDisplayed() {
-        WaitFor.until(this, present());
-
-        return getWrappedEntity().isDisplayed();
+        return WaitFor.until(this, present()).isDisplayed();
     }
 
     public Point getLocation() {
-        WaitFor.until(this, visible());
-
-        return getWrappedEntity().getLocation();
+        return  WaitFor.until(this, visible()).getLocation();
     }
 
     public Dimension getSize() {
-        WaitFor.until(this, visible());
-
-        return getWrappedEntity().getSize();
+        return WaitFor.until(this, visible()).getSize();
     }
 
     public Rectangle getRect() {
-        WaitFor.until(this, visible());
-
-        return getWrappedEntity().getRect();
+        return WaitFor.until(this, visible()).getRect();
     }
 
     public String getCssValue(String s) {
-        WaitFor.until(this, present());
-
-        return getWrappedEntity().getCssValue(s);
+        return WaitFor.until(this, present()).getCssValue(s);
     }
+
 
 }

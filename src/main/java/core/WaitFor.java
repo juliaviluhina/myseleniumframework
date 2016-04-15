@@ -12,11 +12,11 @@ public class WaitFor {
         this.lazyEntity = lazyEntity;
     }
 
-    public static <V> V until(LazyEntity lazyEntity, int timeoutMs, Condition<V>... conditions) {
+    public static <T> T until(LazyEntity lazyEntity, int timeoutMs, Condition<T>... conditions) {
         return new WaitFor(lazyEntity).until(timeoutMs, conditions);
     }
 
-    public static <V> V until(LazyEntity lazyEntity, Condition<V>... conditions) {
+    public static <T> T until(LazyEntity lazyEntity, Condition<T>... conditions) {
         return until(lazyEntity, Configuration.timeout, conditions);
     }
 
@@ -24,18 +24,18 @@ public class WaitFor {
         return new WaitFor(lazyEntity).satisfied(timeoutMs, conditions);
     }
 
-    public <V> V until(int timeoutMs, Condition<V>... conditions) {
-        V result = null;
-        for (Condition<V> condition : conditions) {
+    public <T> T until(int timeoutMs, Condition<T>... conditions) {
+        T result = null;
+        for (Condition<T> condition : conditions) {
             result = until(timeoutMs, condition);
         }
         return result;
     }
 
-    public <V> V until(int timeoutMs, Condition<V> condition) {
+    public <T> T until(int timeoutMs, Condition<T> condition) {
         final long startTime = System.currentTimeMillis();
         do {
-            V result = condition.apply(lazyEntity);
+            T result = condition.apply(lazyEntity);
             if (result == null) {
                 sleep(Configuration.pollingInterval);
                 continue;

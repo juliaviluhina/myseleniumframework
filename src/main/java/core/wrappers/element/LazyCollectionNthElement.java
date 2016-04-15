@@ -20,7 +20,7 @@ public class LazyCollectionNthElement extends AbstractLazyElement {
     }
 
     public WebElement getWrappedEntity() {
-        return parentCollection.getWrappedEntity().get(index);
+        return parentCollection.getWrappedEntity() == null ? null : parentCollection.getWrappedEntity().get(index);
     }
 
 }
