@@ -1,11 +1,8 @@
 package core.wrappers.element;
 
-import core.exceptions.ElementNotFoundInListException;
+import core.exceptions.LazyСollectionIndexOutOfBoundsException;
 import core.wrappers.LazyCollection;
-import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 public class LazyCollectionNthElement extends AbstractLazyElement {
 
@@ -25,7 +22,7 @@ public class LazyCollectionNthElement extends AbstractLazyElement {
         try {
             return parentCollection.getWrappedEntity().get(index);
         } catch (IndexOutOfBoundsException  e) {
-            throw new ElementNotFoundInListException(toString());
+            throw new LazyСollectionIndexOutOfBoundsException(toString());
         }
     }
 

@@ -35,20 +35,19 @@ public class WaitFor {
 
     public <T> T until(int timeoutMs, Condition<T> condition) {
         final long startTime = System.currentTimeMillis();
-        String causeFail = "";
+        Throwable lastError;
         do {
             try {
                 return condition.apply(lazyEntity);
             } catch (WebDriverException e) {
-                causeFail = e.toString();
+                lastError = e;
             }
             sleep(Configuration.pollingInterval);
             continue;
         } while (System.currentTimeMillis() - startTime < timeoutMs);
 
         throw new TimeoutException("\nfailed while waiting " + timeoutMs / 1000 + " seconds" +
-                "\nto assert " + condition.getClass().getSimpleName() +
-                (causeFail.isEmpty() ? "" : ("\ncaused by " + causeFail)));
+                "\nto assert " + condition, lastError);
     }
 
     public boolean satisfied(int timeoutMs, Condition... conditions) {
