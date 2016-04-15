@@ -15,9 +15,9 @@ public class Visible extends ElementCondition {
         return "visible";
     }
 
-    public WebElement check(WebElement element) {
+    public boolean check(WebElement element) {
         isDisplayed = element.isDisplayed();
-        return isDisplayed ? element : null;
+        return isDisplayed;
     }
 
 

@@ -23,14 +23,16 @@ public class CssClass extends ElementCondition {
         return cssClass;
     }
 
-    public WebElement check(WebElement element) {
+    public boolean check(WebElement element) {
+        boolean found = false;
         String[] classes = element.getAttribute("class").split(" ");
         for (int i = 0; i < classes.length; i++) {
-            if (classes[i].equals(cssClass)) {
-                return element;
+            found = classes[i].equals(cssClass);
+            if (found) {
+                break;
             }
         }
-        return null;
+        return found;
     }
 
 }

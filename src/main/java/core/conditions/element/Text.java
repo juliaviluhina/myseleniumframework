@@ -20,12 +20,9 @@ public class Text extends ElementCondition {
         return text;
     }
 
-    public WebElement check(WebElement element) {
+    public boolean check(WebElement element) {
         currentText = element.getText();
-        if (!checkElement()) {
-            return null;
-        }
-        return element;
+        return checkElement();
     }
 
     protected boolean checkElement() {

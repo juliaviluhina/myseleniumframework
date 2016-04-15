@@ -2,21 +2,22 @@ package core.conditions;
 
 
 import core.wrappers.LazyEntity;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriverException;
 
 public abstract class AbstractCondition<T> implements Condition<T>, DescribesResult {
 
     private LazyEntity lazyEntity;
 
-    public abstract T check(T entity);
+    public abstract boolean check(T entity);
 
     public T apply(LazyEntity lazyEntity) {
-        try {
-            this.lazyEntity = lazyEntity;
-            return check((T) lazyEntity.getWrappedEntity());
-        } catch (WebDriverException | IndexOutOfBoundsException e) {
-            return null;
+        this.lazyEntity = lazyEntity;
+        T wrappedEntity = (T) lazyEntity.getWrappedEntity();
+        if(!check(wrappedEntity)) {
+            throw new NotFoundException(toString());
         }
+        return wrappedEntity;
     }
 
     public String toString() {
@@ -25,5 +26,7 @@ public abstract class AbstractCondition<T> implements Condition<T>, DescribesRes
                 (expected() == "" ? "" : "\nexpected " + expected()) +
                 (actual() == "" ? "" : "\nactual " + actual());
     }
+
+
 
 }

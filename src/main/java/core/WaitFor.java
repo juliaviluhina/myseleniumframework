@@ -3,6 +3,7 @@ package core;
 import core.conditions.Condition;
 import core.wrappers.LazyEntity;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriverException;
 
 public class WaitFor {
 
@@ -35,12 +36,16 @@ public class WaitFor {
     public <T> T until(int timeoutMs, Condition<T> condition) {
         final long startTime = System.currentTimeMillis();
         do {
-            T result = condition.apply(lazyEntity);
-            if (result == null) {
-                sleep(Configuration.pollingInterval);
-                continue;
+            try {
+                return condition.apply(lazyEntity);
+            } catch (WebDriverException | IndexOutOfBoundsException e) {
+//                System.out.println(lazyEntity);
+//                System.out.println(e);
+//                System.out.println("");
+//                System.out.println("");
             }
-            return result;
+            sleep(Configuration.pollingInterval);
+            continue;
         } while (System.currentTimeMillis() - startTime < timeoutMs);
 
         throw new TimeoutException("\nfailed while waiting " + timeoutMs / 1000 + " seconds" + "\nto assert " + condition);

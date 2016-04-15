@@ -58,7 +58,14 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public boolean is(ElementCondition condition) {
-        return (condition.apply(this) != null);
+
+        try {
+            condition.apply(this);
+        } catch (WebDriverException e) {
+            return false;
+        }
+        return true;
+
     }
 
     public boolean has(ElementCondition condition) {
@@ -111,7 +118,7 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public void sendKeys(CharSequence... charSequences) {
-        getWrappedEntity().sendKeys(charSequences);
+        WaitFor.until(this, visible()).sendKeys(charSequences);
     }
 
     public String getTagName() {

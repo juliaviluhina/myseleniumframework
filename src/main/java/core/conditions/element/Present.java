@@ -16,9 +16,9 @@ public class Present extends ElementCondition {
         return "present";
     }
 
-    public WebElement check(WebElement element) {
+    public boolean check(WebElement element) {
         isPresent = (element != null);
-        return element;
+        return isPresent;
     }
 
 }

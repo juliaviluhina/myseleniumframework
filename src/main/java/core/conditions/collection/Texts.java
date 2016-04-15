@@ -24,21 +24,20 @@ public class Texts extends CollectionCondition {
         return Arrays.toString(texts);
     }
 
-    public List<WebElement> check(List<WebElement> elements) {
+    public boolean check(List<WebElement> elements) {
         currentTexts = new ArrayList<String>();
         for (int i = 0; i < elements.size(); ++i) {
             currentTexts.add(i, elements.get(i).getText());
         }
         if (currentTexts.size() != texts.length) {
-            return null;
-        } else {
-            for (int i = 0; i < texts.length; ++i) {
-                if (!checkElement(i)) {
-                    return null;
-                }
-            }
-            return elements;
+            return false;
         }
+        for (int i = 0; i < texts.length; ++i) {
+            if (!checkElement(i)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean checkElement(int index) {

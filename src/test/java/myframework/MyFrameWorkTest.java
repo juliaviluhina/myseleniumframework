@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import testconfig.BaseTest;
 
 import static core.ConciseAPI.$;
+import static core.conditions.CollectionConditions.exactTexts;
 import static core.conditions.CollectionConditions.size;
 import static core.conditions.ElementConditions.exactText;
 import static core.conditions.ElementConditions.text;
@@ -57,6 +58,21 @@ public class MyFrameWorkTest extends BaseTest {
         ((WebElement) $("#new-todo")).sendKeys("kuku"+ Keys.ENTER);
 
         assertTasks("аb", "ааb", "ac", "bc", "kuku");
+
+    }
+
+    @Test
+    public void test1() {
+        givenAtAll(ACTIVE, "аb");
+
+        tasks.shouldHave(exactTexts("аb"));
+
+        //assertTasks("ab");
+        LazyElement task = tasks.find(exactText("ab"));
+        LazyElement tasklabel = task.find("label");
+        task.doubleClick();
+        task.click();
+        tasklabel.doubleClick();
 
     }
 
