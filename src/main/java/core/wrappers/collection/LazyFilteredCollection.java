@@ -23,7 +23,7 @@ public class LazyFilteredCollection extends AbstractLazyCollection {
         return parentCollection.toString() + " filter(" + condition.getClass().getSimpleName() + ")";
     }
 
-    public List<WebElement> fetchWrappedEntity() {
+    public List<WebElement> getWrappedEntity() {
         List<WebElement> list = parentCollection.getWrappedEntity();
         List<WebElement> resultList = new ArrayList<WebElement>();
 

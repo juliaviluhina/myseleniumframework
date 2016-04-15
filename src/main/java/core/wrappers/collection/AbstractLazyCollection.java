@@ -18,16 +18,6 @@ import core.WaitFor;
 
 public abstract class AbstractLazyCollection implements LazyCollection {
 
-    public abstract List<WebElement> fetchWrappedEntity();
-
-    public List<WebElement> getWrappedEntity() {
-        List<WebElement> wrappedEntity = fetchWrappedEntity();
-        if (wrappedEntity == null) {
-            throw new NotFoundException(toString());
-        }
-        return wrappedEntity;
-    }
-
     public LazyElement find(ElementCondition condition) {
         return new LazyCollectionFoundByConditionElement(this, condition);
     }

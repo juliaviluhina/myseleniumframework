@@ -20,7 +20,7 @@ public class LazyElementInnerCollection extends AbstractLazyCollection {
         return parentElement.toString() + " findAll(" + innerLocator + ")";
     }
 
-    public List<WebElement> fetchWrappedEntity() {
+    public List<WebElement> getWrappedEntity() {
         return parentElement.getWrappedEntity().findElements(innerLocator);
     }
 
