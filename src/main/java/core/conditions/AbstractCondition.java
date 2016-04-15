@@ -1,6 +1,7 @@
 package core.conditions;
 
 
+import core.exceptions.WebDriverAssertionException;
 import core.wrappers.LazyEntity;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriverException;
@@ -15,7 +16,7 @@ public abstract class AbstractCondition<T> implements Condition<T>, DescribesRes
         this.lazyEntity = lazyEntity;
         T wrappedEntity = (T) lazyEntity.getWrappedEntity();
         if(!check(wrappedEntity)) {
-            throw new NotFoundException(toString());
+            throw new WebDriverAssertionException(toString());
         }
         return wrappedEntity;
     }

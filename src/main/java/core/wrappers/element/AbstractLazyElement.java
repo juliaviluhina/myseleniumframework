@@ -1,6 +1,7 @@
 package core.wrappers.element;
 
 import core.conditions.ElementCondition;
+import core.exceptions.ElementNotFoundException;
 import core.wrappers.LazyCollection;
 import core.wrappers.LazyElement;
 import core.wrappers.collection.LazyElementInnerCollection;
@@ -23,7 +24,7 @@ public abstract class AbstractLazyElement implements LazyElement {
     public WebElement getWrappedEntity() {
         WebElement wrappedEntity = fetchWrappedEntity();
         if (wrappedEntity == null) {
-            throw new NotFoundException(toString());
+            throw new ElementNotFoundException(toString());
         }
         return wrappedEntity;
     }

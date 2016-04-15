@@ -21,7 +21,7 @@ public class WaitFor {
         return until(lazyEntity, Configuration.timeout, conditions);
     }
 
-    public static boolean satisfied(LazyEntity lazyEntity, int timeoutMs, Condition... conditions){
+    public static boolean satisfied(LazyEntity lazyEntity, int timeoutMs, Condition... conditions) {
         return new WaitFor(lazyEntity).satisfied(timeoutMs, conditions);
     }
 
@@ -35,20 +35,20 @@ public class WaitFor {
 
     public <T> T until(int timeoutMs, Condition<T> condition) {
         final long startTime = System.currentTimeMillis();
+        String causeFail = "";
         do {
             try {
                 return condition.apply(lazyEntity);
-            } catch (WebDriverException | IndexOutOfBoundsException e) {
-//                System.out.println(lazyEntity);
-//                System.out.println(e);
-//                System.out.println("");
-//                System.out.println("");
+            } catch (WebDriverException e) {
+                causeFail = e.toString();
             }
             sleep(Configuration.pollingInterval);
             continue;
         } while (System.currentTimeMillis() - startTime < timeoutMs);
 
-        throw new TimeoutException("\nfailed while waiting " + timeoutMs / 1000 + " seconds" + "\nto assert " + condition);
+        throw new TimeoutException("\nfailed while waiting " + timeoutMs / 1000 + " seconds" +
+                "\nto assert " + condition.getClass().getSimpleName() +
+                (causeFail.isEmpty() ? "" : ("\ncaused by " + causeFail)));
     }
 
     public boolean satisfied(int timeoutMs, Condition... conditions) {
