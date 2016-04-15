@@ -19,8 +19,8 @@ public class LazyCollectionNthElement extends AbstractLazyElement {
         return parentCollection.toString() + "[" + index + "]";
     }
 
-    public WebElement getWrappedEntity() {
-        return parentCollection.getWrappedEntity() == null ? null : parentCollection.getWrappedEntity().get(index);
+    public WebElement fetchWrappedEntity() {
+        return parentCollection.getWrappedEntity().get(index);
     }
 
 }

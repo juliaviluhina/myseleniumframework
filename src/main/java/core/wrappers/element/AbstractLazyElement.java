@@ -18,6 +18,16 @@ import static core.conditions.ElementConditions.visible;
 
 public abstract class AbstractLazyElement implements LazyElement {
 
+    public abstract WebElement fetchWrappedEntity();
+
+    public WebElement getWrappedEntity() {
+        WebElement wrappedEntity = fetchWrappedEntity();
+        if (wrappedEntity == null) {
+            throw new NotFoundException(toString());
+        }
+        return wrappedEntity;
+    }
+
     public LazyElement find(By innerLocator) {
         return new LazyElementInnerElement(this, innerLocator);
     }
@@ -93,7 +103,7 @@ public abstract class AbstractLazyElement implements LazyElement {
 
 
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
-       return WaitFor.until(this, visible()).getScreenshotAs(outputType);
+        return WaitFor.until(this, visible()).getScreenshotAs(outputType);
     }
 
     public void submit() {
@@ -137,7 +147,7 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public Point getLocation() {
-        return  WaitFor.until(this, visible()).getLocation();
+        return WaitFor.until(this, visible()).getLocation();
     }
 
     public Dimension getSize() {

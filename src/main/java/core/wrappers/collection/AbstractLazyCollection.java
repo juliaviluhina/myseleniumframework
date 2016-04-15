@@ -6,6 +6,7 @@ import core.wrappers.*;
 import core.wrappers.element.LazyCollectionFoundByConditionElement;
 import core.wrappers.element.LazyCollectionNthElement;
 import core.wrappers.element.LazyWrappedWebElement;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -16,6 +17,16 @@ import core.WaitFor;
 
 
 public abstract class AbstractLazyCollection implements LazyCollection {
+
+    public abstract List<WebElement> fetchWrappedEntity();
+
+    public List<WebElement> getWrappedEntity() {
+        List<WebElement> wrappedEntity = fetchWrappedEntity();
+        if (wrappedEntity == null) {
+            throw new NotFoundException(toString());
+        }
+        return wrappedEntity;
+    }
 
     public LazyElement find(ElementCondition condition) {
         return new LazyCollectionFoundByConditionElement(this, condition);
@@ -61,7 +72,7 @@ public abstract class AbstractLazyCollection implements LazyCollection {
     public String[] getTexts() {
         List<String> texts = new ArrayList<>();
         List<WebElement> elements = getWrappedEntity();
-        for (WebElement element:elements) {
+        for (WebElement element : elements) {
             texts.add(element.getText());
         }
         return texts.toArray(new String[0]);

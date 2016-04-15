@@ -18,8 +18,8 @@ public class LazyElementInnerElement extends AbstractLazyElement {
         return parentElement.toString() + " find(" + innerLocator + ")";
     }
 
-    public WebElement getWrappedEntity() {
-        return parentElement.getWrappedEntity() == null ? null : parentElement.getWrappedEntity().findElement(innerLocator);
+    public WebElement fetchWrappedEntity() {
+        return parentElement.getWrappedEntity().findElement(innerLocator);
     }
 
 }

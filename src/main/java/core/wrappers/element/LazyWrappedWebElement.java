@@ -13,7 +13,7 @@ public class LazyWrappedWebElement extends AbstractLazyElement {
         this.element = element;
     }
 
-    public WebElement getWrappedEntity() {
+    public WebElement fetchWrappedEntity() {
         return element;
     }
 

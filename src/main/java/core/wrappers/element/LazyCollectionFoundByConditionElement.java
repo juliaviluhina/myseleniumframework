@@ -22,7 +22,7 @@ public class LazyCollectionFoundByConditionElement extends AbstractLazyElement {
     }
 
 
-    public WebElement getWrappedEntity() {
+    public WebElement fetchWrappedEntity() {
         List<WebElement> list = parentCollection.getWrappedEntity();
 
         for (WebElement element : list) {
