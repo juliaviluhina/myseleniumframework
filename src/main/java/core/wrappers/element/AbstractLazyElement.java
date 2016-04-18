@@ -75,29 +75,20 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public LazyElement setValue(String text) {
-//        WebElement element = WaitFor.until(this, visible());
-//
-//        element.clear();
-//        element.sendKeys(text);
-//        return this;
-        WaitFor.until(this, visible(), enabled());
+        WebElement element = WaitFor.until(this, visible());
 
-        getWrappedEntity().clear();
-        getWrappedEntity().sendKeys(text);
+        element.clear();
+        element.sendKeys(text);
         return this;
-
     }
 
     public LazyElement pressEnter() {
-//        WaitFor.until(this, visible()).sendKeys(Keys.ENTER);
-//        return this;
-        WaitFor.until(this, visible(), enabled());
-        getWrappedEntity().sendKeys(Keys.ENTER);
+        WaitFor.until(this, visible()).sendKeys(Keys.ENTER);
         return this;
     }
 
     public LazyElement pressEscape() {
-        WaitFor.until(this, visible(), enabled()).sendKeys(Keys.ESCAPE);
+        WaitFor.until(this, visible()).sendKeys(Keys.ESCAPE);
         return this;
     }
 
@@ -107,18 +98,16 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public LazyElement doubleClick() {
-        actions().doubleClick(WaitFor.until(this, visible(), enabled())).perform();
+        actions().doubleClick(WaitFor.until(this, visible())).perform();
         return this;
     }
 
     public void clear() {
-        WaitFor.until(this, visible(), enabled()).clear();
+        WaitFor.until(this, visible()).clear();
     }
 
     public void click() {
-//        WaitFor.until(this, visible()).click();
-        WaitFor.until(this, visible(), enabled());
-        getWrappedEntity().click();
+        WaitFor.until(this, visible()).click();
     }
 
 
@@ -131,7 +120,7 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public void sendKeys(CharSequence... charSequences) {
-        WaitFor.until(this, visible(), enabled()).sendKeys(charSequences);
+        WaitFor.until(this, visible()).sendKeys(charSequences);
     }
 
     public String getTagName() {
@@ -181,6 +170,5 @@ public abstract class AbstractLazyElement implements LazyElement {
     public String getCssValue(String s) {
         return WaitFor.until(this, present()).getCssValue(s);
     }
-
 
 }

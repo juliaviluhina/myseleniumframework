@@ -15,7 +15,7 @@ public abstract class AbstractCondition<T> implements Condition<T>, DescribesRes
     public T apply(LazyEntity lazyEntity) {
         this.lazyEntity = lazyEntity;
         T wrappedEntity = (T) lazyEntity.getWrappedEntity();
-        if(!check(wrappedEntity)) {
+        if (!check(wrappedEntity)) {
             throw new WebDriverAssertionException(toString());
         }
         return wrappedEntity;
@@ -27,7 +27,5 @@ public abstract class AbstractCondition<T> implements Condition<T>, DescribesRes
                 (expected() == "" ? "" : "\nexpected: " + expected()) +
                 (actual() == "" ? "" : "\nactual: " + actual());
     }
-
-
 
 }

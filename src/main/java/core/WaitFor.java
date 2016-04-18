@@ -26,6 +26,9 @@ public class WaitFor {
     }
 
     public <T> T until(int timeoutMs, Condition<T>... conditions) {
+        if (conditions.length == 0) {
+            throw new IllegalArgumentException("Conditions are not given");
+        }
         T result = null;
         for (Condition<T> condition : conditions) {
             result = until(timeoutMs, condition);
@@ -43,7 +46,6 @@ public class WaitFor {
                 lastError = e;
             }
             sleep(Configuration.pollingInterval);
-            continue;
         } while (System.currentTimeMillis() - startTime < timeoutMs);
 
         throw new TimeoutException("\nfailed while waiting " + timeoutMs / 1000 + " seconds" +
