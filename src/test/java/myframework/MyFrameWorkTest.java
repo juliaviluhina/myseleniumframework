@@ -76,4 +76,12 @@ public class MyFrameWorkTest extends BaseTest {
 
     }
 
+    @Test
+    public void test2() {
+        givenAtAll(ACTIVE, "аb");
+
+        System.out.println(tasks.get(0).getText());
+
+    }
+
 }
