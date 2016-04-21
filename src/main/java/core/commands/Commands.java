@@ -4,22 +4,44 @@ import org.openqa.selenium.*;
 
 import java.util.List;
 
+import static core.ConciseAPI.actions;
+
 public class Commands {
 
     public static Command clear() {
-        return new Clear();
+        return new Command<WebElement>() {
+            public WebElement execute(WebElement element) {
+                element.clear();
+                return element;
+            }
+        };
     }
 
     public static Command click() {
-        return new Click();
+        return new Command<WebElement>() {
+            public WebElement execute(WebElement element) {
+                element.click();
+                return element;
+            }
+        };
     }
 
     public static Command doubleClick() {
-        return new DoubleClick();
+        return new Command<WebElement>() {
+            public WebElement execute(WebElement element) {
+                actions().doubleClick(element).perform();
+                return element;
+            }
+        };
     }
 
     public static Command hover() {
-        return new Hover();
+        return new  Command<WebElement>()  {
+            public WebElement execute(WebElement element) {
+                actions().moveToElement(element).perform();
+                return element;
+            }
+        };
     }
 
     public static Command sendKeys(CharSequence... charSequences) {
@@ -35,11 +57,20 @@ public class Commands {
     }
 
     public static Command submit() {
-        return new Submit();
+        return new Command<WebElement>()  {
+            public WebElement execute(WebElement element) {
+                element.submit();
+                return element;
+            }
+        };
     }
 
     public static Command<String> getTagName() {
-        return new GetTagName();
+        return new Command<String>()  {
+            public String execute(WebElement element) {
+                return element.getTagName();
+            }
+        };
     }
 
     public static Command<String> getAttribute(String s) {
@@ -47,19 +78,35 @@ public class Commands {
     }
 
     public static Command<Boolean> isSelected() {
-        return new IsSelected();
+        return new Command<Boolean>() {
+            public Boolean execute(WebElement element) {
+                return element.isSelected();
+            }
+        };
     }
 
     public static Command<Boolean> isEnabled() {
-        return new IsEnabled();
+        return new Command<Boolean>() {
+            public Boolean execute(WebElement element) {
+                return element.isEnabled();
+            }
+        };
     }
 
     public static Command<Boolean> isDisplayed() {
-        return new IsDisplayed();
+        return new Command<Boolean>() {
+            public Boolean execute(WebElement element) {
+                return element.isDisplayed();
+            }
+        };
     }
 
     public static Command<String> getText() {
-        return new GetText();
+        return new Command<String>()  {
+            public String execute(WebElement element) {
+                return element.getText();
+            }
+        };
     }
 
     public static Command<List<WebElement>> findElements(By locator) {
@@ -71,15 +118,27 @@ public class Commands {
     }
 
     public static Command<Point> getLocation() {
-        return new GetLocation();
+        return new Command<Point>() {
+            public Point execute(WebElement element) {
+                return element.getLocation();
+            }
+        };
     }
 
     public static Command<Dimension> getSize() {
-        return new GetSize();
+        return new Command<Dimension>() {
+            public Dimension execute(WebElement element) {
+                return element.getSize();
+            }
+        };
     }
 
     public static Command<Rectangle> getRect() {
-        return new GetRect();
+        return new Command<Rectangle>() {
+            public Rectangle execute(WebElement element) {
+                return element.getRect();
+            }
+        };
     }
 
     public static Command<String> getCssValue(String s) {
