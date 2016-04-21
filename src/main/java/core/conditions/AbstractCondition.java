@@ -10,8 +10,6 @@ public abstract class AbstractCondition<T> implements Condition<T>, DescribesRes
 
     private LazyEntity lazyEntity;
 
-    public abstract boolean check(T entity);
-
     public T apply(LazyEntity lazyEntity) {
         this.lazyEntity = lazyEntity;
         T wrappedEntity = (T) lazyEntity.getWrappedEntity();

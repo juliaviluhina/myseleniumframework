@@ -62,12 +62,10 @@ public abstract class AbstractLazyElement implements LazyElement {
     public boolean is(ElementCondition condition) {
 
         try {
-            condition.apply(this);
+            return condition.check(getWrappedEntity());
         } catch (WebDriverException e) {
             return false;
         }
-        return true;
-
     }
 
     public boolean has(ElementCondition condition) {
