@@ -1,7 +1,7 @@
 package core.wrappers.element;
 
-import core.CommandRunner;
-import core.commands.Commands;
+import core.WithWaitFor;
+import core.commands.Command;
 import core.conditions.ElementCondition;
 import core.exceptions.ElementNotFoundException;
 import core.wrappers.LazyCollection;
@@ -13,6 +13,7 @@ import java.util.List;
 
 import core.WaitFor;
 
+import static core.ConciseAPI.actions;
 import static core.ConciseAPI.byCSS;
 import static core.conditions.ElementConditions.present;
 import static core.conditions.ElementConditions.visible;
@@ -71,98 +72,186 @@ public abstract class AbstractLazyElement implements LazyElement {
         return is(condition);
     }
 
-    public LazyElement setValue(String text) {
-        CommandRunner.forElement(this).withWaitFor(visible()).withParameters(text).run(Commands.setValue());
+    public LazyElement setValue(final String text) {
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            public WebElement execute(WebElement element) {
+                element.clear();
+                element.sendKeys(text);
+                return element;
+            }
+        });
         return this;
     }
 
     public LazyElement pressEnter() {
-        CommandRunner.forElement(this).withWaitFor(visible()).withParameters(Keys.ENTER).run(Commands.sendKeys());
+        sendKeys(Keys.ENTER);
         return this;
     }
 
     public LazyElement pressEscape() {
-        CommandRunner.forElement(this).withWaitFor(visible()).withParameters(Keys.ESCAPE).run(Commands.sendKeys());
+        sendKeys(Keys.ESCAPE);
         return this;
     }
 
+    public void sendKeys(final CharSequence... charSequences) {
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            public WebElement execute(WebElement element) {
+                element.sendKeys(charSequences);
+                return element;
+            }
+        });
+    }
+
     public LazyElement hover() {
-        CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.hover());
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            public WebElement execute(WebElement element) {
+                actions().moveToElement(element).perform();
+                return element;
+            }
+        });
         return this;
     }
 
     public LazyElement doubleClick() {
-        CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.doubleClick());
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            public WebElement execute(WebElement element) {
+                actions().doubleClick(element).perform();
+                return element;
+            }
+        });
         return this;
     }
 
     public void clear() {
-        CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.clear());
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            public WebElement execute(WebElement element) {
+                element.clear();
+                return element;
+            }
+        });
     }
 
     public void click() {
-        CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.click());
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            public WebElement execute(WebElement element) {
+                element.click();
+                return element;
+            }
+        });
     }
 
 
-    public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
-        return (X) CommandRunner.forElement(this).withWaitFor(visible()).withParameters(outputType).run(Commands.getScreenshotAs());
+    public <X> X getScreenshotAs(final OutputType<X> outputType) throws WebDriverException {
+        return new WithWaitFor(this, visible()).run(new Command<X>() {
+            public X execute(WebElement element) {
+                return element.getScreenshotAs(outputType);
+            }
+        });
     }
 
     public void submit() {
-        CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.submit());
-    }
-
-    public void sendKeys(CharSequence... charSequences) {
-        CommandRunner.forElement(this).withWaitFor(visible()).withParameters(charSequences).run(Commands.sendKeys());
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            public WebElement execute(WebElement element) {
+                element.submit();
+                return element;
+            }
+        });
     }
 
     public String getTagName() {
-        return CommandRunner.forElement(this).withWaitFor(present()).run(Commands.getTagName());
+        return new WithWaitFor(this, present()).run(new Command<String>() {
+            public String execute(WebElement element) {
+                return element.getTagName();
+            }
+        });
     }
 
-    public String getAttribute(String s) {
-        return CommandRunner.forElement(this).withWaitFor(present()).withParameters(s).run(Commands.getAttribute());
+    public String getAttribute(final String s) {
+        return new WithWaitFor(this, present()).run(new Command<String>() {
+            public String execute(WebElement element) {
+                return element.getAttribute(s);
+            }
+        });
     }
 
     public boolean isSelected() {
-        return CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.isSelected());
+        return new WithWaitFor(this, visible()).run(new Command<Boolean>() {
+            public Boolean execute(WebElement element) {
+                return element.isSelected();
+            }
+        });
     }
 
     public boolean isEnabled() {
-        return CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.isEnabled());
+        return new WithWaitFor(this, visible()).run(new Command<Boolean>() {
+            public Boolean execute(WebElement element) {
+                return element.isEnabled();
+            }
+        });
     }
 
     public String getText() {
-        return CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.getText());
+        return new WithWaitFor(this, visible()).run(new Command<String>() {
+            public String execute(WebElement element) {
+                return element.getText();
+            }
+        });
     }
 
-    public List<WebElement> findElements(By locator) {
-        return CommandRunner.forElement(this).withWaitFor(visible()).withParameters(locator).run(Commands.findElements());
+    public List<WebElement> findElements(final By locator) {
+        return new WithWaitFor(this, visible()).run(new Command<List<WebElement>>() {
+            public List<WebElement> execute(WebElement element) {
+                return element.findElements(locator);
+            }
+        });
     }
 
-    public WebElement findElement(By locator) {
-        return CommandRunner.forElement(this).withWaitFor(visible()).withParameters(locator).run(Commands.findElement());
+    public WebElement findElement(final By locator) {
+        return new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            public WebElement execute(WebElement element) {
+                return element.findElement(locator);
+            }
+        });
     }
 
     public boolean isDisplayed() {
-        return CommandRunner.forElement(this).withWaitFor(present()).run(Commands.isDisplayed());
+        return new WithWaitFor(this, present()).run(new Command<Boolean>() {
+            public Boolean execute(WebElement element) {
+                return element.isDisplayed();
+            }
+        });
     }
 
     public Point getLocation() {
-        return CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.getLocation());
+        return new WithWaitFor(this, visible()).run(new Command<Point>() {
+            public Point execute(WebElement element) {
+                return element.getLocation();
+            }
+        });
     }
 
     public Dimension getSize() {
-        return CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.getSize());
+        return new WithWaitFor(this, visible()).run(new Command<Dimension>() {
+            public Dimension execute(WebElement element) {
+                return element.getSize();
+            }
+        });
     }
 
     public Rectangle getRect() {
-        return CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.getRect());
+        return new WithWaitFor(this, visible()).run(new Command<Rectangle>() {
+            public Rectangle execute(WebElement element) {
+                return element.getRect();
+            }
+        });
     }
 
-    public String getCssValue(String s) {
-        return CommandRunner.forElement(this).withWaitFor(present()).withParameters(s).run(Commands.getCssValue());
+    public String getCssValue(final String s) {
+        return new WithWaitFor(this, present()).run(new Command<String>() {
+            public String execute(WebElement element) {
+                return element.getCssValue(s);
+            }
+        });
     }
 
 }
