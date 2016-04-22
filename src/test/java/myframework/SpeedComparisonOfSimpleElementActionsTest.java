@@ -31,6 +31,8 @@ public class SpeedComparisonOfSimpleElementActionsTest {
         open("https://todomvc4tasj.herokuapp.com/#");
         $("#new-todo").shouldBe(visible());
 
+        //driverForSeleniumActions = getDriver();
+
         driverForSeleniumActions = new FirefoxDriver();
         driverForSeleniumActions.get("https://todomvc4tasj.herokuapp.com/#");
         new WebDriverWait(driverForSeleniumActions, 4).until(visibilityOfElementLocated(By.cssSelector("#new-todo")));
@@ -52,6 +54,7 @@ public class SpeedComparisonOfSimpleElementActionsTest {
         long myFrameworkTime = createTasksWithMyFrameWorkAndSenKeys();
 
         System.out.println(String.format("%s vs %s (Difference = %s while expected is < 12)", myFrameworkTime, seleniumTime, (myFrameworkTime - seleniumTime) * 100/seleniumTime));
+        //System.out.println(String.format("%s vs %s ( expected is < 12)", myFrameworkTime, seleniumTime));
 
         assertTrue( myFrameworkTime < 1.12 * seleniumTime);
     }
@@ -62,6 +65,7 @@ public class SpeedComparisonOfSimpleElementActionsTest {
         long myFrameworkTime = createTasksWithMyFrameWorkAndSenKeys();
 
         System.out.println(String.format("%s vs %s (Actual difference = %s while expected is < 51", myFrameworkTime, seleniumTime, (myFrameworkTime - seleniumTime) * 100 /seleniumTime));
+        //System.out.println(String.format("%s vs %s ( while expected is < 51", myFrameworkTime, seleniumTime));
 
         assertTrue( myFrameworkTime < 1.51 * seleniumTime);
     }
