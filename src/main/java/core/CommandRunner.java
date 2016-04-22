@@ -14,6 +14,7 @@ public class CommandRunner<T> {
     public static class Builder {
         private ElementCondition waitCondition;
         private LazyElement lazyElement;
+        private Object[] parameters;
 
         private Builder(LazyElement lazyElement) {
             this.lazyElement = lazyElement;
@@ -21,6 +22,11 @@ public class CommandRunner<T> {
 
         public Builder withWaitFor(ElementCondition waitCondition) {
             this.waitCondition = waitCondition;
+            return this;
+        }
+
+        public Builder withParameters(Object... parameters) {
+            this.parameters = parameters.clone();
             return this;
         }
 
@@ -32,14 +38,17 @@ public class CommandRunner<T> {
 
     private ElementCondition waitCondition;
     private LazyElement lazyElement;
+    private Object[] parameters;
 
     private CommandRunner(Builder builder) {
         this.waitCondition = builder.waitCondition;
         this.lazyElement = builder.lazyElement;
+        this.parameters = builder.parameters;
     }
 
     private T runWithWaitCondition(Command<T> command) {
         try {
+            command.setParameters(parameters);
             return command.execute(lazyElement.getWrappedEntity());
         } catch (WebDriverException e) {
         }

@@ -60,7 +60,6 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public boolean is(ElementCondition condition) {
-
         try {
             return condition.check(getWrappedEntity());
         } catch (WebDriverException e) {
@@ -73,17 +72,17 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public LazyElement setValue(String text) {
-        CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.setValue(text));
+        CommandRunner.forElement(this).withWaitFor(visible()).withParameters(text).run(Commands.setValue());
         return this;
     }
 
     public LazyElement pressEnter() {
-        CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.sendKeys(Keys.ENTER));
+        CommandRunner.forElement(this).withWaitFor(visible()).withParameters(Keys.ENTER).run(Commands.sendKeys());
         return this;
     }
 
     public LazyElement pressEscape() {
-        CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.sendKeys(Keys.ESCAPE));
+        CommandRunner.forElement(this).withWaitFor(visible()).withParameters(Keys.ESCAPE).run(Commands.sendKeys());
         return this;
     }
 
@@ -107,7 +106,7 @@ public abstract class AbstractLazyElement implements LazyElement {
 
 
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
-        return CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.getScreenshotAs(outputType));
+        return (X) CommandRunner.forElement(this).withWaitFor(visible()).withParameters(outputType).run(Commands.getScreenshotAs());
     }
 
     public void submit() {
@@ -115,7 +114,7 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public void sendKeys(CharSequence... charSequences) {
-        CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.sendKeys(charSequences));
+        CommandRunner.forElement(this).withWaitFor(visible()).withParameters(charSequences).run(Commands.sendKeys());
     }
 
     public String getTagName() {
@@ -123,7 +122,7 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public String getAttribute(String s) {
-        return CommandRunner.forElement(this).withWaitFor(present()).run(Commands.getAttribute(s));
+        return CommandRunner.forElement(this).withWaitFor(present()).withParameters(s).run(Commands.getAttribute());
     }
 
     public boolean isSelected() {
@@ -139,11 +138,11 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public List<WebElement> findElements(By locator) {
-        return CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.findElements(locator));
+        return CommandRunner.forElement(this).withWaitFor(visible()).withParameters(locator).run(Commands.findElements());
     }
 
     public WebElement findElement(By locator) {
-        return CommandRunner.forElement(this).withWaitFor(visible()).run(Commands.findElement(locator));
+        return CommandRunner.forElement(this).withWaitFor(visible()).withParameters(locator).run(Commands.findElement());
     }
 
     public boolean isDisplayed() {
@@ -163,7 +162,7 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public String getCssValue(String s) {
-        return CommandRunner.forElement(this).withWaitFor(present()).run(Commands.getCssValue(s));
+        return CommandRunner.forElement(this).withWaitFor(present()).withParameters(s).run(Commands.getCssValue());
     }
 
 }

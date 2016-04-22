@@ -84,4 +84,14 @@ public class MyFrameWorkTest extends BaseTest {
 
     }
 
+    @Test
+    public void test3() {
+        givenAtAll(ACTIVE, "аb");
+
+        newTask.sendKeys("ekek"+Keys.ENTER);
+
+        assertTasks("ab", "ekek");
+
+    }
+
 }
