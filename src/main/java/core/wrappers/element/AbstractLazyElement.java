@@ -1,7 +1,7 @@
 package core.wrappers.element;
 
 import core.WithWaitFor;
-import core.commands.Command;
+import core.Command;
 import core.conditions.ElementCondition;
 import core.exceptions.ElementNotFoundException;
 import core.wrappers.LazyCollection;

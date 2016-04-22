@@ -1,6 +1,5 @@
 package core.conditions;
 
-import core.conditions.CollectionCondition;
 import core.conditions.collection.*;
 
 public class CollectionConditions {

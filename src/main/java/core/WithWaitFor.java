@@ -1,6 +1,5 @@
 package core;
 
-import core.commands.Command;
 import core.conditions.ElementCondition;
 import core.wrappers.LazyElement;
 import org.openqa.selenium.WebDriverException;
