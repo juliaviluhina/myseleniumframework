@@ -1,31 +1,49 @@
 package myframework;
 
+import core.ConciseAPI;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import testconfig.BaseTest;
 
 import static core.ConciseAPI.$;
 import static core.ConciseAPI.getDriver;
 import static core.ConciseAPI.open;
+import static core.conditions.ElementConditions.visible;
 import static org.junit.Assert.assertTrue;
-import static pages.todomvc.ToDoMVC.givenAtAll;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
-public class SpeedComparisonOfSimpleElementActionsTest extends BaseTest {
+
+public class SpeedComparisonOfSimpleElementActionsTest {
+
+    static WebDriver driverForSeleniumActions;
+
     @BeforeClass
     public static void opensite() {
+        ConciseAPI.setDriver(new FirefoxDriver());
         open("https://todomvc4tasj.herokuapp.com/#");
-        new WebDriverWait(getDriver(), 10).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#new-todo")));
+        $("#new-todo").shouldBe(visible());
+
+        driverForSeleniumActions = new FirefoxDriver();
+        driverForSeleniumActions.get("https://todomvc4tasj.herokuapp.com/#");
+        new WebDriverWait(driverForSeleniumActions, 4).until(visibilityOfElementLocated(By.cssSelector("#new-todo")));
     }
+
+    @AfterClass
+    public static void teardown() {
+        ConciseAPI.getDriver().quit();
+        driverForSeleniumActions.quit();
+    }
+
 
     @Test
     public void testMyFrameworkIsAlmostAsFastSeleniumWithResearch() {
-
         long seleniumTime = createTasksWithRawSeleniumWithResearch();
         long myFrameworkTime = createTasksWithMyFrameWorkAndSenKeys();
 
@@ -36,7 +54,6 @@ public class SpeedComparisonOfSimpleElementActionsTest extends BaseTest {
 
     @Test
     public void testMyFrameworkIsTo50PercentsSlowerThanSelenium() {
-
         long seleniumTime = createTasksWithRawSelenium();
         long myFrameworkTime = createTasksWithMyFrameWorkAndSenKeys();
 
@@ -49,10 +66,10 @@ public class SpeedComparisonOfSimpleElementActionsTest extends BaseTest {
     public long createTasksWithRawSelenium() {
         long startTime = System.currentTimeMillis();
 
-        WebElement newTask = getDriver().findElement(By.cssSelector("#new-todo"));
+        WebElement newTask = driverForSeleniumActions.findElement(By.cssSelector("#new-todo"));
 
         for (int i = 0; i < 10; i++) {
-            newTask.sendKeys("task " + i + Keys.ENTER);
+            newTask.sendKeys("selenium " + i + Keys.ENTER);
         }
 
         return System.currentTimeMillis() - startTime;
@@ -62,8 +79,8 @@ public class SpeedComparisonOfSimpleElementActionsTest extends BaseTest {
         long startTime = System.currentTimeMillis();
 
         for (int i = 0; i < 10; i++) {
-            WebElement newTask = getDriver().findElement(By.cssSelector("#new-todo"));
-            newTask.sendKeys("task " + i + Keys.ENTER);
+            WebElement newTask = driverForSeleniumActions.findElement(By.cssSelector("#new-todo"));
+            newTask.sendKeys("selenium " + i + Keys.ENTER);
         }
 
         return System.currentTimeMillis() - startTime;
@@ -73,7 +90,7 @@ public class SpeedComparisonOfSimpleElementActionsTest extends BaseTest {
         long startTime = System.currentTimeMillis();
 
         for (int i = 0; i < 10; i++) {
-            $("#new-todo").sendKeys("task " + i + Keys.ENTER);
+            $("#new-todo").sendKeys("my framework " + i + Keys.ENTER);
         }
 
         return System.currentTimeMillis() - startTime;
