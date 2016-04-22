@@ -16,6 +16,7 @@ public class WithWaitFor {
 
     public  <T> T run(Command<T> command) {
         try {
+            //WaitFor.until(lazyElement, waitCondition); //for emulation slower solution
             return command.execute(lazyElement.getWrappedEntity());
         } catch (WebDriverException e) {
         }

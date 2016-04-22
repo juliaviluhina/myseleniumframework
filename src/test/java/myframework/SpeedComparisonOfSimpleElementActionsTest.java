@@ -23,6 +23,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 public class SpeedComparisonOfSimpleElementActionsTest {
 
     static WebDriver driverForSeleniumActions;
+    static WebDriver driverForTopWindow;
 
     @BeforeClass
     public static void opensite() {
@@ -33,12 +34,15 @@ public class SpeedComparisonOfSimpleElementActionsTest {
         driverForSeleniumActions = new FirefoxDriver();
         driverForSeleniumActions.get("https://todomvc4tasj.herokuapp.com/#");
         new WebDriverWait(driverForSeleniumActions, 4).until(visibilityOfElementLocated(By.cssSelector("#new-todo")));
+
+        driverForTopWindow = new FirefoxDriver();
     }
 
     @AfterClass
     public static void teardown() {
         ConciseAPI.getDriver().quit();
         driverForSeleniumActions.quit();
+        driverForTopWindow.quit();
     }
 
 
