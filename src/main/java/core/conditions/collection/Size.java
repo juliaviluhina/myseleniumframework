@@ -1,11 +1,10 @@
 package core.conditions.collection;
 
-import core.conditions.CollectionCondition;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class Size extends CollectionCondition {
+public class Size extends AbstractCollectionCondition {
 
     public int listSize;
     public int expectedSize;

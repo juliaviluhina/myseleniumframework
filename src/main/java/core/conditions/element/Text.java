@@ -1,9 +1,8 @@
 package core.conditions.element;
 
-import core.conditions.ElementCondition;
 import org.openqa.selenium.WebElement;
 
-public class Text extends ElementCondition {
+public class Text extends AbstractElementCondition {
 
     public String currentText;
     public String text;

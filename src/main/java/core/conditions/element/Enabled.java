@@ -1,10 +1,9 @@
 package core.conditions.element;
 
-import core.conditions.ElementCondition;
 import org.openqa.selenium.WebElement;
 
 
-public class Enabled extends ElementCondition {
+public class Enabled extends AbstractElementCondition {
 
     private boolean isEnabled;
 

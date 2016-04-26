@@ -1,13 +1,12 @@
 package core.conditions.collection;
 
-import core.conditions.CollectionCondition;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Texts extends CollectionCondition {
+public class Texts extends AbstractCollectionCondition {
 
     public List<String> currentTexts;
     public String[] texts;

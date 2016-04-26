@@ -1,12 +1,11 @@
 package core.conditions.element;
 
-import core.conditions.ElementCondition;
 import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 
 
-public class CssClass extends ElementCondition {
+public class CssClass extends AbstractElementCondition {
 
     public final String cssClass;
     public String[] classes;

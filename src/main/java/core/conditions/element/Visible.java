@@ -1,9 +1,8 @@
 package core.conditions.element;
 
-import core.conditions.ElementCondition;
 import org.openqa.selenium.WebElement;
 
-public class Visible extends ElementCondition {
+public class Visible extends AbstractElementCondition {
 
     private boolean isDisplayed;
 

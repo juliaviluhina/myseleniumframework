@@ -1,10 +1,9 @@
 package core.conditions.element;
 
-import core.conditions.ElementCondition;
 import org.openqa.selenium.WebElement;
 
 
-public class Present extends ElementCondition {
+public class Present extends AbstractElementCondition {
 
     private boolean isPresent;
 
